@@ -1,0 +1,18 @@
+We'll have like 3 apps, one for children, another for adults, and elder people
+
+Each one will create their profile, with a scroller age input, then select with a checkbox if they are a law professional
+
+If professional they should be redirected to a new page to complete their profile with a resume, approved by an admin
+
+Geolocalization for nearby professionals. They would be able to set a visit, voice or video call.
+
+Filters by languages (sign, quechua, guarani, english, etc.), experience, speciality. This will all be in a map.
+Professionals will assign theirselves a role
+
+Alert button to call cops, firefighters, and medics
+
+Main index.vue will have a nav bar to "Inicio", "Mapa", "Especialistas", "Comunidad", "Emergencias", and a button to chat with Chatbot called ("Ramon")
+"Comunidad" will have a forum
+"Especialistas" will have a list for all near professionals
+
+Chatbot to link any related content

@@ -1,0 +1,166 @@
+{
+  "app": {
+    "name": "Justicia Cerca"
+  },
+  "nav": {
+    "inicio": "Home",
+    "mapa": "Map",
+    "especialistas": "Specialists",
+    "comunidad": "Community",
+    "emergencias": "Emergencies",
+    "ingresar": "Sign in",
+    "salir": "Sign out"
+  },
+  "home": {
+    "hero": "Legal and psychosocial support near you",
+    "sub": "Find verified professionals, book appointments and get guidance.",
+    "choose_mode": "Choose your mode",
+    "modes": {
+      "CHILD": {
+        "label": "Children",
+        "desc": "0–12 years"
+      },
+      "ADULT": {
+        "label": "Adults",
+        "desc": "13–64 years"
+      },
+      "ELDER": {
+        "label": "Older adults",
+        "desc": "65+ years"
+      }
+    },
+    "quick_links": "Quick links"
+  },
+  "modo": {
+    "title": "Select your age",
+    "birth": "Date of birth",
+    "next": "Continue",
+    "CHILD": "Children mode",
+    "ADULT": "Adult mode",
+    "ELDER": "Senior mode",
+    "hint": "Your mode adapts automatically to your age."
+  },
+  "especialistas": {
+    "title": "Specialists near you",
+    "filters": "Filters",
+    "rol": "Type",
+    "especialidad": "Specialty",
+    "idioma": "Language",
+    "minExp": "Min. experience (years)",
+    "radius": "Radius (km)",
+    "apply": "Apply filters",
+    "reset": "Clear",
+    "book": "Book",
+    "visit": "In-person",
+    "voice": "Call",
+    "video": "Video call",
+    "distance": "km",
+    "empty": "No professionals match those filters.",
+    "no_geo": "Default location: {city}"
+  },
+  "mapa": {
+    "title": "Specialists map",
+    "refresh": "Use my location",
+    "not_found": "Map not available"
+  },
+  "comunidad": {
+    "title": "Community",
+    "new_topic": "New topic",
+    "replies": "replies",
+    "locked": "Locked",
+    "back": "Back",
+    "post": "Post"
+  },
+  "emergencias": {
+    "title": "Emergencies",
+    "subtitle": "Tap to call directly",
+    "confirm": "Call now",
+    "policia": "Police",
+    "bomberos": "Firefighters",
+    "medicos": "Medical emergencies",
+    "llamar": "Call",
+    "cancelar": "Cancel",
+    "local_help": "Local support",
+    "slim": "SLIM — Municipal Legal Service",
+    "felcv": "FELCV — Special Force against Violence",
+    "fiscalia": "District Prosecutor",
+    "defensoria": "Children's Advocacy Office"
+  },
+  "auth": {
+    "login": "Sign in",
+    "register": "Create account",
+    "email": "Email",
+    "password": "Password",
+    "name": "Full name",
+    "birth": "Date of birth",
+    "phone": "Phone (optional)",
+    "isProfessional": "I am a professional (lawyer, psychologist, social worker, translator, paralegal)",
+    "register_cta": "Register",
+    "login_cta": "Sign in",
+    "login_error": "Incorrect email or password.",
+    "no_account": "No account?",
+    "have_account": "Already have an account?",
+    "guardian_title": "Registering a child (0–12)",
+    "guardian_desc": "A guardian must create their account and accept the link.",
+    "guardian_consent": "I am the legal guardian and I give my consent",
+    "guardian_cta": "Register and link",
+    "email_exists": "This email is already registered."
+  },
+  "perfil": {
+    "title": "My profile",
+    "edit": "Edit",
+    "save": "Save",
+    "apply_professional": "Complete professional profile",
+    "pro_status": "Application status",
+    "resubmit": "Resubmit application",
+    "bookings": "My bookings",
+    "status": {
+      "PENDING": "Pending review",
+      "APPROVED": "Approved",
+      "REJECTED": "Rejected"
+    }
+  },
+  "profesional": {
+    "title": "Professional profile",
+    "headline": "Short headline",
+    "bio": "About you (experience, languages...)",
+    "exp": "Years of experience",
+    "city": "City",
+    "roles": "Role (select several)",
+    "specialties": "Specialties",
+    "languages": "Languages you speak",
+    "cv": "Resume (PDF)",
+    "submit": "Submit application",
+    "pending_hint": "Your profile becomes visible once an admin approves it."
+  },
+  "admin": {
+    "title": "Admin panel",
+    "approvals": "Professional applications",
+    "approve": "Approve",
+    "reject": "Reject",
+    "reason": "Rejection reason",
+    "faq": "FAQ management",
+    "empty": "No pending applications."
+  },
+  "reservar": {
+    "title": "Book with",
+    "modality": "Modality",
+    "slot": "Available slots",
+    "notes": "Briefly describe your query",
+    "confirm": "Confirm booking",
+    "no_slots": "No available slots.",
+    "success": "Booking requested. You will receive a confirmation.",
+    "detail": "Booking detail"
+  },
+  "ramon": {
+    "name": "Ramon",
+    "welcome": "Hi! I'm Ramon. Pick a question or type in plain language.",
+    "placeholder": "Type your question...",
+    "open_link": "View related content",
+    "back": "Back",
+    "fallback": "I didn't understand. Choose an option from the menu."
+  },
+  "footer": {
+    "disclaimer": "Informational content, not legal advice. In emergencies call Police 110."
+  }
+}

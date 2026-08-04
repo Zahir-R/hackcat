@@ -1,0 +1,166 @@
+{
+  "app": {
+    "name": "Justicia Cerca"
+  },
+  "nav": {
+    "inicio": "Inicio",
+    "mapa": "Mapa",
+    "especialistas": "Especialistas",
+    "comunidad": "Comunidad",
+    "emergencias": "Emergencias",
+    "ingresar": "Ingresar",
+    "salir": "Salir"
+  },
+  "home": {
+    "hero": "Apoyo legal y psicosocial cerca de ti",
+    "sub": "Encuentra profesionales verificados, reserva citas y recibe orientación. Así funciona: elige tu edad, explora, reserva.",
+    "choose_mode": "Elige tu modo",
+    "modes": {
+      "CHILD": {
+        "label": "Niños y niñas",
+        "desc": "0–12 años"
+      },
+      "ADULT": {
+        "label": "Adultos",
+        "desc": "13–64 años"
+      },
+      "ELDER": {
+        "label": "Personas mayores",
+        "desc": "65+ años"
+      }
+    },
+    "quick_links": "Accesos rápidos"
+  },
+  "modo": {
+    "title": "Selecciona tu edad",
+    "birth": "Fecha de nacimiento",
+    "next": "Continuar",
+    "CHILD": "Modo niños",
+    "ADULT": "Modo adultos",
+    "ELDER": "Modo mayores",
+    "hint": "Tu modo se adapta automáticamente según tu edad."
+  },
+  "especialistas": {
+    "title": "Especialistas cerca de ti",
+    "filters": "Filtros",
+    "rol": "Tipo de profesional",
+    "especialidad": "Especialidad",
+    "idioma": "Idioma",
+    "minExp": "Experiencia mínima (años)",
+    "radius": "Radio (km)",
+    "apply": "Aplicar filtros",
+    "reset": "Limpiar",
+    "book": "Reservar",
+    "visit": "Visita",
+    "voice": "Llamada",
+    "video": "Videollamada",
+    "distance": "km",
+    "empty": "No hay profesionales con esos filtros.",
+    "no_geo": "Ubicación por defecto: {city}"
+  },
+  "mapa": {
+    "title": "Mapa de profesionales",
+    "refresh": "Usar mi ubicación",
+    "not_found": "Mapa no disponible"
+  },
+  "comunidad": {
+    "title": "Comunidad",
+    "new_topic": "Crear tema",
+    "replies": "respuestas",
+    "locked": "Cerrado",
+    "back": "Volver",
+    "post": "Publicar"
+  },
+  "emergencias": {
+    "title": "Emergencias",
+    "subtitle": "Toca para llamar directamente",
+    "confirm": "¿Llamar ahora a",
+    "policia": "Policía",
+    "bomberos": "Bomberos",
+    "medicos": "Emergencias médicas",
+    "llamar": "Llamar",
+    "cancelar": "Cancelar",
+    "local_help": "Apoyo local",
+    "slim": "SLIM — Servicio Legal Integral Municipal",
+    "felcv": "FELCV — Fuerza Especial de Lucha contra la Violencia",
+    "fiscalia": "Fiscalía de Distrito",
+    "defensoria": "Defensoría de la Niñez y Adolescencia"
+  },
+  "auth": {
+    "login": "Ingresar",
+    "register": "Crear cuenta",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "name": "Nombre y apellido",
+    "birth": "Fecha de nacimiento",
+    "phone": "Teléfono (opcional)",
+    "isProfessional": "Soy profesional (abogado/a, psicólogo/a, trabajador/a social, traductor/a, paralegal)",
+    "register_cta": "Registrarse",
+    "login_cta": "Ingresar",
+    "login_error": "Correo o contraseña incorrectos.",
+    "no_account": "¿No tienes cuenta?",
+    "have_account": "¿Ya tienes cuenta?",
+    "guardian_title": "Registro de un niño o niña (0–12)",
+    "guardian_desc": "Un tutor debe crear su cuenta y aceptar la vinculación.",
+    "guardian_consent": "Soy el tutor legal y doy mi consentimiento",
+    "guardian_cta": "Registrar y vincular",
+    "email_exists": "Este correo ya está registrado."
+  },
+  "perfil": {
+    "title": "Mi perfil",
+    "edit": "Editar",
+    "save": "Guardar",
+    "apply_professional": "Completar perfil profesional",
+    "pro_status": "Estado de la solicitud",
+    "resubmit": "Reenviar solicitud",
+    "bookings": "Mis reservas",
+    "status": {
+      "PENDING": "Pendiente de revisión",
+      "APPROVED": "Aprobado",
+      "REJECTED": "Rechazado"
+    }
+  },
+  "profesional": {
+    "title": "Perfil profesional",
+    "headline": "Presentación corta",
+    "bio": "Sobre ti (experiencia, idiomas...)",
+    "exp": "Años de experiencia",
+    "city": "Ciudad",
+    "roles": "Rol (puedes elegir varios)",
+    "specialties": "Especialidades",
+    "languages": "Idiomas que hablas",
+    "cv": "Currículum (PDF)",
+    "submit": "Enviar solicitud",
+    "pending_hint": "Tu perfil será visible cuando un administrador lo apruebe."
+  },
+  "admin": {
+    "title": "Panel de administración",
+    "approvals": "Solicitudes de profesionales",
+    "approve": "Aprobar",
+    "reject": "Rechazar",
+    "reason": "Motivo del rechazo",
+    "faq": "Gestión de FAQ",
+    "empty": "No hay solicitudes pendientes."
+  },
+  "reservar": {
+    "title": "Reservar con",
+    "modality": "Modalidad",
+    "slot": "Franjas disponibles",
+    "notes": "Cuéntanos brevemente tu consulta",
+    "confirm": "Confirmar reserva",
+    "no_slots": "No hay franjas disponibles.",
+    "success": "Reserva solicitada. Recibirás una confirmación.",
+    "detail": "Detalle de la reserva"
+  },
+  "ramon": {
+    "name": "Ramon",
+    "welcome": "¡Hola! Soy Ramon. Elige una pregunta o escríbeme en lenguaje sencillo.",
+    "placeholder": "Escribe tu pregunta...",
+    "open_link": "Ver contenido relacionado",
+    "back": "Atrás",
+    "fallback": "No entendí tu consulta. Elige una opción del menú."
+  },
+  "footer": {
+    "disclaimer": "Contenido orientativo, no constituye asesoría legal. En emergencias llama a la Policía 110."
+  }
+}

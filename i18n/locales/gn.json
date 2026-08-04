@@ -1,0 +1,166 @@
+{
+  "app": {
+    "name": "Justicia Cerca"
+  },
+  "nav": {
+    "inicio": "Ñepyrũ",
+    "mapa": "Mapa",
+    "especialistas": "Mba'eporãhára",
+    "comunidad": "Aty",
+    "emergencias": "Emergencia",
+    "ingresar": "Ñepyrũ",
+    "salir": "Sẽ"
+  },
+  "home": {
+    "hero": "Tepytyvõrã oĩva ne rendápe",
+    "sub": "Eheka mba'eporãhára, emboaje cita ha emombe'u ne añetegua.",
+    "choose_mode": "Eiporavo nde modo",
+    "modes": {
+      "CHILD": {
+        "label": "Mitãngue",
+        "desc": "0–12 ary"
+      },
+      "ADULT": {
+        "label": "Ava guasu",
+        "desc": "13–64 ary"
+      },
+      "ELDER": {
+        "label": "Itujaváva",
+        "desc": "65+ ary"
+      }
+    },
+    "quick_links": "Aguijereko"
+  },
+  "modo": {
+    "title": "Eiporavo nde edad",
+    "birth": "Ára de ñemano",
+    "next": "Señor",
+    "CHILD": "Modo mitã",
+    "ADULT": "Modo ava guasu",
+    "ELDER": "Modo itujaváva",
+    "hint": "Nde modo oñemboheko ijehegui nde edad rehe."
+  },
+  "especialistas": {
+    "title": "Mba'eporãhára nde ykére",
+    "filters": "Mbogua",
+    "rol": "Mba'eporãhára apy",
+    "especialidad": "Especialidad",
+    "idioma": "Ñe'ẽ",
+    "minExp": "Mba'epyahu (ary)",
+    "radius": "Radio (km)",
+    "apply": "Mbogua",
+    "reset": "Mopotĩ",
+    "book": "Emboaje",
+    "visit": "Jeguata",
+    "voice": "Ñe'ẽ",
+    "video": "Video",
+    "distance": "km",
+    "empty": "Ndaipóri mba'eporãhára ko mboguápe.",
+    "no_geo": "Táva ipypegua: {city}"
+  },
+  "mapa": {
+    "title": "Mapa mba'eporãhára",
+    "refresh": "Eiporu che renda",
+    "not_found": "Mapa ndaipóri"
+  },
+  "comunidad": {
+    "title": "Aty",
+    "new_topic": "Emoñepyrũ tema",
+    "replies": "ñembohovai",
+    "locked": "Mboty",
+    "back": "Jevy",
+    "post": "Momarandu"
+  },
+  "emergencias": {
+    "title": "Emergencia",
+    "subtitle": "Eñembopu hendápe",
+    "confirm": "¿Ehenói ko'ãga",
+    "policia": "Policía",
+    "bomberos": "Bomberos",
+    "medicos": "Médico emergencia",
+    "llamar": "Ehenói",
+    "cancelar": "Mboty",
+    "local_help": "Tepytyvõ táva pypegua",
+    "slim": "SLIM",
+    "felcv": "FELCV",
+    "fiscalia": "Fiscalía",
+    "defensoria": "Defensoría"
+  },
+  "auth": {
+    "login": "Ñepyrũ",
+    "register": "Emoñepyrũ cuenta",
+    "email": "Correo",
+    "password": "Ñe'ẽñemi",
+    "name": "Téra",
+    "birth": "Ára de ñemano",
+    "phone": "Teléfono (opcional)",
+    "isProfessional": "Che mba'eporãhára (abogado, psicólogo, trabajador social, traductor, paralegal)",
+    "register_cta": "Rejapota",
+    "login_cta": "Ñepyrũ",
+    "login_error": "Correo térã contraseña naiporãi.",
+    "no_account": "¿Nda rekuái cuenta?",
+    "have_account": "¿Reguereko cuenta?",
+    "guardian_title": "Registro mitã (0–12)",
+    "guardian_desc": "Ñangareko va'erã omoñepyrũ cuenta.",
+    "guardian_consent": "Che ñangareko, ahechauka consentimiento",
+    "guardian_cta": "Rejapota ha jokupyty",
+    "email_exists": "Ko correo ñepyrũmba'e oĩma."
+  },
+  "perfil": {
+    "title": "Che perfil",
+    "edit": "Embosako'i",
+    "save": "Ñongatu",
+    "apply_professional": "Embosako'i perfil profesional",
+    "pro_status": "Estado",
+    "resubmit": "Embojevy",
+    "bookings": "Che reserva",
+    "status": {
+      "PENDING": "Ohóva",
+      "APPROVED": "Oñemoneĩ",
+      "REJECTED": "Ndohóiva"
+    }
+  },
+  "profesional": {
+    "title": "Perfil profesional",
+    "headline": "Ñe'ẽmbyrã",
+    "bio": "Nde rehegua",
+    "exp": "Mba'epyahu ary",
+    "city": "Táva",
+    "roles": "Rol (hetáva eiporavo)",
+    "specialties": "Especialidad",
+    "languages": "Ñe'ẽ oñe'ẽva nde",
+    "cv": "Currículum (PDF)",
+    "submit": "Emondo",
+    "pending_hint": "Administrador omoneĩ jave ojekuaáta."
+  },
+  "admin": {
+    "title": "Administración",
+    "approvals": "Solicitud mba'eporãhára",
+    "approve": "Moneĩ",
+    "reject": "Mboty",
+    "reason": "Mba'eicha",
+    "faq": "FAQ",
+    "empty": "Ndaipóri solicitud."
+  },
+  "reservar": {
+    "title": "Emboaje",
+    "modality": "Modalidad",
+    "slot": "Ára oĩva",
+    "notes": "Emombe'u pukuete",
+    "confirm": "Emboaje",
+    "no_slots": "Ndaipóri ára.",
+    "success": "Reserva ojapota. Confirmación reme'ẽta.",
+    "detail": "Detalle"
+  },
+  "ramon": {
+    "name": "Ramon",
+    "welcome": "¡Mba'éichapa! Che Ramon. Eiporavo porandu térã ehái.",
+    "placeholder": "Ehái nde porandu...",
+    "open_link": "Ehecha marandu",
+    "back": "Jevy",
+    "fallback": "Ndaikuaái. Eiporavo menú-gui."
+  },
+  "footer": {
+    "disclaimer": "Marandu oipytyvõ, ndaha'éi asesoría legal. Emergencia-pe ehenói Policía 110."
+  }
+}

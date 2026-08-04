@@ -1,0 +1,166 @@
+{
+  "app": {
+    "name": "Justicia Cerca"
+  },
+  "nav": {
+    "inicio": "Qallariy",
+    "mapa": "Mapa",
+    "especialistas": "Yanapaqkuna",
+    "comunidad": "Comunidad",
+    "emergencias": "Urgentekuna",
+    "ingresar": "Yaykuy",
+    "salir": "Lluqsiy"
+  },
+  "home": {
+    "hero": "Yanapaqkuna qayllaykipi",
+    "sub": "Rikapusqa yanapaqkunata maskhay, citata reservay, yanapayta chaskiy.",
+    "choose_mode": "Modoykita akllay",
+    "modes": {
+      "CHILD": {
+        "label": "Wawakuna",
+        "desc": "0–12 watakuna"
+      },
+      "ADULT": {
+        "label": "Hatun runakuna",
+        "desc": "13–64 watakuna"
+      },
+      "ELDER": {
+        "label": "Machu runakuna",
+        "desc": "65+ watakuna"
+      }
+    },
+    "quick_links": "Usqhay ruraykuna"
+  },
+  "modo": {
+    "title": "Wataykita akllay",
+    "birth": "Paqarisqa p'unchaw",
+    "next": "Qatiy",
+    "CHILD": "Wawakuna modo",
+    "ADULT": "Hatun runa modo",
+    "ELDER": "Machu modo",
+    "hint": "Modoyki wataykiman hina kikillanmanta t'ikrakun."
+  },
+  "especialistas": {
+    "title": "Yanapaqkuna qayllaykipi",
+    "filters": "Chulluwkuna",
+    "rol": "Yanapaq laya",
+    "especialidad": "Especialidad",
+    "idioma": "Simi",
+    "minExp": "Musuq experiencia (watakuna)",
+    "radius": "Radio (km)",
+    "apply": "Chulluta ch'uyanachiy",
+    "reset": "Pichay",
+    "book": "Reservay",
+    "visit": "Puriq riy",
+    "voice": "Waqyay",
+    "video": "Videollamada",
+    "distance": "km",
+    "empty": "Chay chullukunawanqa mana kanchu.",
+    "no_geo": "Kay llaqta qallariypaq: {city}"
+  },
+  "mapa": {
+    "title": "Yanapaqkuna mapa",
+    "refresh": "Kayta apamuway",
+    "not_found": "Mapa mana kanchu"
+  },
+  "comunidad": {
+    "title": "Comunidad",
+    "new_topic": "Tema ruray",
+    "replies": "kutichiykuna",
+    "locked": "Wichq'asqa",
+    "back": "Kutiy",
+    "post": "Kachay"
+  },
+  "emergencias": {
+    "title": "Urgentekuna",
+    "subtitle": "Waqyaykunapaq chaypi ñit'iy",
+    "confirm": "¿Kunan waqyayta munankichu",
+    "policia": "Policía",
+    "bomberos": "Bomberos",
+    "medicos": "Médicos urgentekuna",
+    "llamar": "Waqyay",
+    "cancelar": "Amullay",
+    "local_help": "Kay llaqtapi yanapay",
+    "slim": "SLIM — Municipal Integral Legal Servicio",
+    "felcv": "FELCV — Violencia contrayuq Fuerza",
+    "fiscalia": "Fiscalía",
+    "defensoria": "Wawakuna Defensoría"
+  },
+  "auth": {
+    "login": "Yaykuy",
+    "register": "Cuenta ruray",
+    "email": "Correo",
+    "password": "Yaykuna sapaq rimay",
+    "name": "Suti",
+    "birth": "Paqarisqa p'unchaw",
+    "phone": "Teléfono (mana kamachinachu)",
+    "isProfessional": "Yanapaq kani (abogado, psicólogo, trabajador social, traductor, paralegal)",
+    "register_cta": "Registrakuy",
+    "login_cta": "Yaykuy",
+    "login_error": "Correo utaq contraseña pantasqa.",
+    "no_account": "¿Cuenta mana kaptiyki?",
+    "have_account": "¿Cuenta kaptiyki?",
+    "guardian_title": "Wawa registru (0–12)",
+    "guardian_desc": "Tutorniyki cuenta ruwanan kachkan.",
+    "guardian_consent": "Tutor kani, consentimientota quni",
+    "guardian_cta": "Registraytaq vinculaytaq",
+    "email_exists": "Kay correoqa ña registrasqa kachkan."
+  },
+  "perfil": {
+    "title": "Nuqaq perfily",
+    "edit": "T'inkuy",
+    "save": "Waayqay",
+    "apply_professional": "Perfil profesionalta hunt'achiy",
+    "pro_status": "Mañakuy qhawasqan",
+    "resubmit": "Mañakuyta musuqmanta kachay",
+    "bookings": "Reservasniy",
+    "status": {
+      "PENDING": "Qhawakuchkan",
+      "APPROVED": "Chaskisqa",
+      "REJECTED": "Manachaskisqa"
+    }
+  },
+  "profesional": {
+    "title": "Perfil profesional",
+    "headline": "Pisi willakuy",
+    "bio": "Qamanta",
+    "exp": "Experiencia watakuna",
+    "city": "Llaqta",
+    "roles": "Rol (achkata akllayta atikunki)",
+    "specialties": "Especialidades",
+    "languages": "Rimasqayki simikuna",
+    "cv": "Currículum (PDF)",
+    "submit": "Mañakuyta kachay",
+    "pending_hint": "Administrador chaskiqtinmi perfilyki rikurinqa."
+  },
+  "admin": {
+    "title": "Administración panel",
+    "approvals": "Yanapaq mañakuykuna",
+    "approve": "Chaskiy",
+    "reject": "Manachaskiy",
+    "reason": "Manachaskiy raykun",
+    "faq": "FAQ kamachiy",
+    "empty": "Manam kanchu mañakuykuna."
+  },
+  "reservar": {
+    "title": "Reservay",
+    "modality": "Modalidad",
+    "slot": "Franjas disponibles",
+    "notes": "Mañakuykita pisi willaway",
+    "confirm": "Reservata sut'ichay",
+    "no_slots": "Manam kanchu franjas.",
+    "success": "Reserva mañakusqa. Confirmaqta chaskinki.",
+    "detail": "Reserva detalle"
+  },
+  "ramon": {
+    "name": "Ramon",
+    "welcome": "¡Allin p'unchaw! Nuqaqa Ramon. Tapukuyta akllay icha qillqaway.",
+    "placeholder": "Tapukuyta qillqay...",
+    "open_link": "Tupachisqa willakuyta qhaway",
+    "back": "Kutiy",
+    "fallback": "Manam entiendachu. Menumanta akllay."
+  },
+  "footer": {
+    "disclaimer": "Willakuyninkuna yanapan, manam lege asesoriyachu. Urgentepi Policía 110 waqyay."
+  }
+}

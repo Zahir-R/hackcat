@@ -1,6 +1,15 @@
+<script setup lang="ts">
+const { ageMode } = useAgeMode()
+if (import.meta.client) {
+  watchEffect(() => {
+    document.documentElement.dataset.mode = ageMode.value
+  })
+}
+</script>
+
 <template>
-  <div>
-    <NuxtRouteAnnouncer />
-    <NuxtWelcome />
-  </div>
+  <NuxtRouteAnnouncer />
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>
