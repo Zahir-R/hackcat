@@ -27,7 +27,7 @@ function callNow() {
 <template>
   <div>
     <h1>{{ t('emergencias.title') }}</h1>
-    <p class="muted">{{ t('emergencias.subtitle') }}</p>
+    <p class="text-muted text-sm">{{ t('emergencias.subtitle') }}</p>
 
     <div>
       <button
@@ -41,11 +41,11 @@ function callNow() {
       </button>
     </div>
 
-    <section class="card mt">
+    <section class="card mt-4">
       <h2>{{ t('emergencias.local_help') }}</h2>
-      <div v-for="h in localHelp" :key="h.label" class="row spread">
+      <div v-for="h in localHelp" :key="h.label" class="flex gap-3 items-center justify-between flex-wrap">
         <span>{{ h.label }}</span>
-        <a :href="`tel:${h.number}`" class="muted">{{ h.number }}</a>
+        <a :href="`tel:${h.number}`" class="text-muted text-sm">{{ h.number }}</a>
       </div>
     </section>
 

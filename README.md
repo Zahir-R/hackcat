@@ -1,4 +1,4 @@
-# Justicia Cerca
+# Normalizer
 
 PWA de acceso a la justicia que conecta ciudadanos bolivianos (niños, adultos y personas mayores) con profesionales de apoyo jurídico y psicosocial verificados: mapa y geolocalización, reservas de visitas/llamadas, foro comunitario, botón de emergencias y el asistente determinista de FAQ **Ramon** (sin LLM).
 

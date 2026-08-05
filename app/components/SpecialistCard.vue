@@ -1,40 +1,31 @@
 <script setup lang="ts">
 import type { Specialist } from '~/types'
+import { useCatalog } from '~/composables/useCatalog'
 
+const { roleLabel, specialtyLabel, languageLabel } = useCatalog()
 defineProps<{ specialist: Specialist }>()
 </script>
 
 <template>
-  <NuxtLink :to="`/especialistas/${specialist.id}`" class="card spec-card">
-    <div class="spec-head">
-      <div class="avatar">{{ specialist.name.charAt(0) }}</div>
+  <NuxtLink :to="`/especialistas/${specialist.id}`" class="card block no-underline text-text hover:border-accent">
+    <div class="flex gap-2.5 items-center">
+      <div class="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold shrink-0">
+        {{ specialist.name.charAt(0) }}
+      </div>
       <div>
         <strong>{{ specialist.name }}</strong>
-        <div class="muted">{{ specialist.headline }}</div>
+        <div class="text-muted text-sm">{{ specialist.headline }}</div>
       </div>
-      <span v-if="specialist.distanceKm !== undefined" class="badge ok">{{ specialist.distanceKm }} {{ $t('especialistas.distance') }}</span>
+      <span v-if="specialist.distanceKm !== undefined" class="badge ok ml-auto">{{ specialist.distanceKm }} {{ $t('especialistas.distance') }}</span>
     </div>
-    <p class="bio">{{ specialist.bio }}</p>
+    <p class="text-sm mt-2">{{ specialist.bio }}</p>
     <div>
-      <span v-for="r in specialist.roles" :key="r" class="pill">{{ r }}</span>
-      <span v-for="s in specialist.specialties" :key="s" class="pill">{{ s }}</span>
-      <span v-for="l in specialist.languages" :key="l" class="pill lang">{{ l }}</span>
+      <span v-for="r in specialist.roles" :key="r" class="pill">{{ roleLabel(r) }}</span>
+      <span v-for="s in specialist.specialties" :key="s" class="pill">{{ specialtyLabel(s) }}</span>
+      <span v-for="l in specialist.languages" :key="l" class="pill lang">{{ languageLabel(l) }}</span>
     </div>
-    <div class="mt">
+    <div class="mt-1">
       {{ specialist.experienceYears }} años de experiencia
     </div>
   </NuxtLink>
 </template>
-
-<style scoped>
-.spec-card { display: block; color: inherit; text-decoration: none; }
-.spec-head { display: flex; gap: 0.7rem; align-items: center; }
-.avatar {
-  width: 48px; height: 48px; border-radius: 50%;
-  background: var(--color-primary); color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.3rem; font-weight: 700; flex-shrink: 0;
-}
-.bio { font-size: 0.9rem; }
-.pill.lang { background: #fdeeda; }
-</style>

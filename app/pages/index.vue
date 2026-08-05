@@ -12,39 +12,19 @@ const quickLinks = computed(() => [
 
 <template>
   <div>
-    <section class="card hero">
-      <h1>{{ t('home.hero') }}</h1>
-      <p>{{ t('home.sub') }}</p>
-    </section>
-
-    <section class="card">
-      <h2>{{ t('home.choose_mode') }}</h2>
-      <ProfileScroller :model-value="birthDate" @update:model-value="setBirthDate" />
-      <div class="grid grid-2" style="margin-top: 1rem">
-        <div v-for="m in ['CHILD', 'ADULT', 'ELDER']" :key="m" class="mode-card" :class="{ active: ageMode === m }">
-          <strong>{{ t(`home.modes.${m}.label`) }}</strong>
-          <div class="muted">{{ t(`home.modes.${m}.desc`) }}</div>
-        </div>
-      </div>
+    <section class="card p-6 border-primary-dark bg-[linear-gradient(135deg,var(--color-primary-dark),var(--color-primary))]">
+      <h1 class="text-[#FBEFDA] text-[2rem] mt-0 mb-2">{{ t('home.hero') }}</h1>
+      <p class="text-[#F0D3A8] mb-0">{{ t('home.sub') }}</p>
     </section>
 
     <section>
       <h2>{{ t('home.quick_links') }}</h2>
-      <div class="grid grid-2">
-        <NuxtLink v-for="q in quickLinks" :key="q.to" :to="q.to" class="card quick">
-          <span class="quick-icon">{{ q.icon }}</span>
+      <div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(260px,1fr))]">
+        <NuxtLink v-for="q in quickLinks" :key="q.to" :to="q.to" class="card flex items-center gap-2.5 no-underline text-text hover:border-accent">
+          <span class="text-2xl">{{ q.icon }}</span>
           {{ q.label }}
         </NuxtLink>
       </div>
     </section>
   </div>
 </template>
-
-<style scoped>
-.hero { background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark)); color: #fff; }
-.hero p { color: #d9e7e1; }
-.mode-card { border: 2px solid var(--color-border); border-radius: var(--radius); padding: 0.8rem; }
-.mode-card.active { border-color: var(--color-primary); background: #eef4f0; }
-.quick { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: inherit; }
-.quick-icon { font-size: 1.5rem; }
-</style>

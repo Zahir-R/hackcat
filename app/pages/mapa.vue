@@ -14,19 +14,19 @@ const center = computed(() => coords.value ?? fallback)
 
 <template>
   <div>
-    <div class="spread">
+    <div class="flex justify-between items-center gap-3 flex-wrap">
       <h1>{{ t('mapa.title') }}</h1>
-      <button @click="locate().then(fetchSpecialists)">{{ t('mapa.refresh') }}</button>
+      <button class="btn" @click="locate().then(fetchSpecialists)">{{ t('mapa.refresh') }}</button>
     </div>
-    <p v-if="permissionDenied" class="muted">{{ t('especialistas.no_geo', { city: 'Sucre' }) }}</p>
+    <p v-if="permissionDenied" class="text-muted text-sm">{{ t('especialistas.no_geo', { city: 'Sucre' }) }}</p>
     <ClientOnly>
       <MapLeaflet :specialists="specialists" :center="center" @select="id => navigateTo(`/especialistas/${id}`)" />
       <template #fallback>
         <div class="card">{{ t('mapa.not_found') }}</div>
       </template>
     </ClientOnly>
-    <h2 class="mt">{{ t('nav.especialistas') }}</h2>
-    <div class="grid grid-2">
+    <h2 class="mt-4">{{ t('nav.especialistas') }}</h2>
+    <div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(260px,1fr))]">
       <SpecialistCard v-for="s in specialists" :key="s.id" :specialist="s" />
     </div>
   </div>

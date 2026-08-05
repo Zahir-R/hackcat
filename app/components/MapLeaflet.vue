@@ -55,18 +55,17 @@ onBeforeUnmount(() => { map.value?.remove() })
 </script>
 
 <template>
-  <div class="map-wrap">
-    <div ref="el" class="map" />
+  <div class="relative rounded-[var(--radius)] overflow-hidden border border-border">
+    <div ref="el" class="relative z-0 h-[420px] w-full" />
   </div>
 </template>
 
-<style scoped>
-.map-wrap { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--color-border); }
-.map { height: 420px; width: 100%; }
-:global(.sp-marker-dot) {
+<style>
+.map-wrap .leaflet-top, .map-wrap .leaflet-bottom { z-index: 1; }
+.sp-marker-dot {
   width: 34px; height: 34px; border-radius: 50%;
   background: var(--color-primary); color: #fff;
   display: flex; align-items: center; justify-content: center;
-  border: 2px solid #fff; box-shadow: var(--shadow); font-size: 1rem;
+  border: 2px solid #fff; box-shadow: var(--shadow-card); font-size: 1rem;
 }
 </style>

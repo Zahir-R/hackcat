@@ -32,48 +32,41 @@ function submit() {
 </script>
 
 <template>
-  <div class="auth-wrap">
-    <form class="card" @submit.prevent="submit">
+  <div class="flex justify-center pt-4">
+    <form class="card w-[min(460px,100%)]" @submit.prevent="submit">
       <h1>{{ t('auth.register') }}</h1>
 
       <label>{{ t('auth.name') }}
-        <input v-model="displayName" required />
+        <input v-model="displayName" class="input" required />
       </label>
       <label>{{ t('auth.email') }}
-        <input v-model="email" type="email" required />
+        <input v-model="email" type="email" class="input" required />
       </label>
       <label>{{ t('auth.password') }}
-        <input v-model="password" type="password" minlength="6" required />
+        <input v-model="password" type="password" class="input" minlength="6" required />
       </label>
 
-      <div class="mt">
+      <div class="mt-4">
         <strong>{{ t('auth.birth') }}</strong>
-        <ProfileScroller :model-value="birthDate" @update:model-value="setBirthDate" />
+        <AgeSlider :model-value="birthDate" @update:model-value="setBirthDate" />
       </div>
 
       <label>{{ t('auth.phone') }}
-        <input v-model="phone" type="tel" />
+        <input v-model="phone" type="tel" class="input" />
       </label>
 
-      <label class="check">
-        <input v-model="isProfessional" type="checkbox" />
+      <label class="flex items-center gap-2 font-normal">
+        <input v-model="isProfessional" type="checkbox" class="w-auto min-h-6" />
         {{ t('auth.isProfessional') }}
       </label>
 
       <p v-if="error" class="field-error">{{ error }}</p>
-      <button class="primary" type="submit">{{ t('auth.register_cta') }}</button>
+      <button class="btn btn-primary" type="submit">{{ t('auth.register_cta') }}</button>
 
-      <p class="muted mt">
+      <p class="text-muted text-sm mt-4">
         {{ t('auth.have_account') }}
         <NuxtLink to="/auth/login">{{ t('auth.login') }}</NuxtLink>
       </p>
     </form>
   </div>
 </template>
-
-<style scoped>
-.auth-wrap { display: flex; justify-content: center; padding-top: 1rem; }
-.auth-wrap form { width: min(460px, 100%); }
-.check { display: flex; align-items: center; gap: 0.5rem; font-weight: 400; }
-.check input { width: auto; min-height: 24px; }
-</style>

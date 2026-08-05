@@ -2,6 +2,7 @@
 const { t } = useI18n()
 const { isAdmin, applications, approve, reject } = useAuth()
 const { items, fetchFaq } = useFaq()
+const { roleLabel, languageLabel } = useCatalog()
 
 const rejectId = ref<string | null>(null)
 const rejectReason = ref('')
@@ -34,47 +35,39 @@ const faqStats = computed(() => ({
 
     <section class="card">
       <h2>{{ t('admin.approvals') }}</h2>
-      <div v-if="!pending.length" class="muted">{{ t('admin.empty') }}</div>
-      <div v-for="a in pending" :key="a.id" class="app-row">
+      <div v-if="!pending.length" class="text-muted text-sm">{{ t('admin.empty') }}</div>
+      <div v-for="a in pending" :key="a.id" class="border-b border-border py-3 flex gap-4 justify-between items-start flex-wrap">
         <div>
           <strong>{{ a.headline }}</strong>
-          <div class="muted">{{ a.roles.join(', ') }} · {{ a.experienceYears }} años · {{ a.city }}</div>
+          <div class="text-muted text-sm">{{ a.roles.map(roleLabel).join(', ') }} · {{ a.experienceYears }} años · {{ a.city }}</div>
           <p>{{ a.bio }}</p>
           <div>
-            <span v-for="l in a.languages" :key="l" class="pill">{{ l }}</span>
+            <span v-for="l in a.languages" :key="l" class="pill">{{ languageLabel(l) }}</span>
           </div>
         </div>
-        <div class="row">
-          <button class="primary" @click="approve(a.id)">{{ t('admin.approve') }}</button>
-          <button class="danger" @click="rejectId = a.id">{{ t('admin.reject') }}</button>
+        <div class="flex gap-3 items-center flex-wrap">
+          <button class="btn btn-primary" @click="approve(a.id)">{{ t('admin.approve') }}</button>
+          <button class="btn btn-danger" @click="rejectId = a.id">{{ t('admin.reject') }}</button>
         </div>
       </div>
 
-      <div v-if="rejectId" class="card mt">
+      <div v-if="rejectId" class="card mt-4">
         <label>{{ t('admin.reason') }}
-          <input v-model="rejectReason" />
+          <input v-model="rejectReason" class="input" />
         </label>
-        <button class="danger mt" @click="confirmReject">{{ t('admin.reject') }}</button>
+        <button class="btn btn-danger mt-4" @click="confirmReject">{{ t('admin.reject') }}</button>
       </div>
     </section>
 
     <section class="card">
       <h2>{{ t('admin.faq') }}</h2>
       <p>Total de ítems: <strong>{{ faqStats.total }}</strong></p>
-      <div class="row">
+      <div class="flex gap-3 items-center flex-wrap">
         <span v-for="(count, mode) in faqStats.porModo" :key="mode" class="pill">
           {{ mode }}: {{ count }}
         </span>
       </div>
-      <p class="muted">La edición de FAQ se administra en la base de datos (`faq_categories` / `faq_items`).</p>
+      <p class="text-muted text-sm">La edición de FAQ se administra en la base de datos (`faq_categories` / `faq_items`).</p>
     </section>
   </div>
 </template>
-
-<style scoped>
-.app-row {
-  border-bottom: 1px solid var(--color-border);
-  padding: 0.8rem 0;
-  display: flex; gap: 1rem; justify-content: space-between; align-items: flex-start; flex-wrap: wrap;
-}
-</style>

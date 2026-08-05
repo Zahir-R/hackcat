@@ -4,7 +4,7 @@ Guidance for working in this repository. Read before making changes.
 
 ## Project
 
-"Justicia Cerca" — legal-access PWA (Nuxt 4). Prototype runs on **mock data** (`server/data/mock.ts`); the real Supabase schema/edge functions are reference-only in `supabase/`. Specs are the source of truth: `docs/SRS.md` (requirements/use cases) and `docs/SDD.md` (architecture, SQL+RLS, business logic).
+"Normalizer" — legal-access PWA (Nuxt 4). Prototype runs on **mock data** (`server/data/mock.ts`); the real Supabase schema/edge functions are reference-only in `supabase/`. Specs are the source of truth: `docs/SRS.md` (requirements/use cases) and `docs/SDD.md` (architecture, SQL+RLS, business logic).
 
 ## Commands
 

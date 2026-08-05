@@ -28,28 +28,24 @@ function fmt(s: string) {
 
 <template>
   <div v-if="topic">
-    <NuxtLink to="/comunidad" class="muted">← {{ t('comunidad.back') }}</NuxtLink>
+    <NuxtLink to="/comunidad" class="text-muted text-sm">← {{ t('comunidad.back') }}</NuxtLink>
     <div class="card">
-      <h1 style="margin-top: 0.5rem">
+      <h1 class="mt-2">
         {{ topic.title }}
         <span v-if="topic.status === 'LOCKED'" class="badge warn">{{ t('comunidad.locked') }}</span>
       </h1>
       <p>{{ topic.body }}</p>
-      <div class="muted">{{ topic.authorName }} · {{ fmt(topic.createdAt) }}</div>
+      <div class="text-muted text-sm">{{ topic.authorName }} · {{ fmt(topic.createdAt) }}</div>
     </div>
 
-    <div v-for="r in topic.replies.filter(x => !x.hidden)" :key="r.id" class="card reply">
+    <div v-for="r in topic.replies.filter(x => !x.hidden)" :key="r.id" class="card bg-bg">
       <p>{{ r.body }}</p>
-      <div class="muted">{{ r.authorName }} · {{ fmt(r.createdAt) }}</div>
+      <div class="text-muted text-sm">{{ r.authorName }} · {{ fmt(r.createdAt) }}</div>
     </div>
 
     <form v-if="isLoggedIn && topic.status !== 'LOCKED'" class="card" @submit.prevent="addReply">
-      <textarea v-model="reply" rows="2" :placeholder="t('comunidad.post')" />
-      <button class="primary mt" type="submit">{{ t('comunidad.post') }}</button>
+      <textarea v-model="reply" rows="2" class="input" :placeholder="t('comunidad.post')" />
+      <button class="btn btn-primary mt-4" type="submit">{{ t('comunidad.post') }}</button>
     </form>
   </div>
 </template>
-
-<style scoped>
-.reply { background: var(--color-bg); }
-</style>

@@ -1,6 +1,6 @@
 # Documento de Diseño de Software (SDD)
 
-**Proyecto:** Plataforma de Acceso a la Justicia — "Justicia Cerca"
+**Proyecto:** Plataforma de Acceso a la Justicia — "Normalizer"
 **Referencia de requisitos:** `docs/SRS.md`
 **Estado:** Borrador v1.0
 
@@ -10,7 +10,7 @@
 
 ### 1.1 Propósito
 
-Este documento describe el diseño técnico de la PWA "Justicia Cerca": arquitectura, estructura del proyecto, modelo de datos físico (SQL + RLS), y **toda la lógica de negocio** (modos por edad, tutela, aprobación de profesionales, búsqueda geográfica, reservas, emergencias, foro y el chatbot determinista Ramon). Implementa los requisitos de `docs/SRS.md` sobre el stack: **Nuxt 4 (Vue 3) + Supabase (Auth, Postgres/PostGIS, Storage, Edge Functions) + Leaflet/OSM**.
+Este documento describe el diseño técnico de la PWA "Normalizer": arquitectura, estructura del proyecto, modelo de datos físico (SQL + RLS), y **toda la lógica de negocio** (modos por edad, tutela, aprobación de profesionales, búsqueda geográfica, reservas, emergencias, foro y el chatbot determinista Ramon). Implementa los requisitos de `docs/SRS.md` sobre el stack: **Nuxt 4 (Vue 3) + Supabase (Auth, Postgres/PostGIS, Storage, Edge Functions) + Leaflet/OSM**.
 
 ### 1.2 Decisiones de diseño clave
 
@@ -32,7 +32,7 @@ Este documento describe el diseño técnico de la PWA "Justicia Cerca": arquitec
 ┌────────────────────────── CLIENTE (Nuxt 4 / PWA CSR) ──────────────────────────┐
 │ app/                                                                           │
 │  pages/  index | mapa | especialistas | comunidad | emergencias | perfil | admin│
-│  components/ (NavBar, ProfileScroller, SpecialistCard, MapLeaflet, ChatRamon…) │
+│  components/ (NavBar, AgeSlider, SpecialistCard, MapLeaflet, ChatRamon…) │
 │  composables/ (useAuth, useAgeMode, useGeolocation, useBookings, useFaq, …)   │
 │  i18n/ es|qu|gn|en                                                             │
 │  stores/ (ageMode, sesión, Ramon)                                              │
@@ -82,7 +82,7 @@ app/
     perfil/index.vue          # Mi perfil
     perfil/profesional.vue    # Perfil profesional (CV, roles, agenda)
     admin/index.vue           # Panel admin (aprobaciones, foro, FAQ)
-  components/                 # NavBar, ProfileScroller, MapLeaflet, ChatRamon, ...
+  components/                 # NavBar, AgeSlider, MapLeaflet, ChatRamon, ...
   composables/                # useAuth, useAgeMode, useGeolocation, useBookings, useFaq
   middleware/                 # auth.global, guardian.ts, admin.ts
   i18n/                       # es.ts, qu.ts, gn.ts, en.ts
@@ -136,7 +136,7 @@ create table public.profiles (
   updated_at    timestamptz not null default now()
 );
 
--- Vínculo tutor–menor (menores 0–12)
+-- Vínculo tutor–menor (menores 8–12)
 create table public.guardian_links (
   id              uuid primary key default gen_random_uuid(),
   guardian_id     uuid not null references public.profiles(id) on delete cascade,

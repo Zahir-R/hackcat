@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Justicia Cerca"
+    "name": "Normalizer"
   },
   "nav": {
     "inicio": "Inicio",
@@ -8,6 +8,8 @@
     "especialistas": "Especialistas",
     "comunidad": "Comunidad",
     "emergencias": "Emergencias",
+    "admin": "Administración",
+    "perfil": "Perfil",
     "ingresar": "Ingresar",
     "salir": "Salir"
   },
@@ -18,7 +20,7 @@
     "modes": {
       "CHILD": {
         "label": "Niños y niñas",
-        "desc": "0–12 años"
+        "desc": "8–12 años"
       },
       "ADULT": {
         "label": "Adultos",
@@ -26,7 +28,7 @@
       },
       "ELDER": {
         "label": "Personas mayores",
-        "desc": "65+ años"
+        "desc": "65–100 años"
       }
     },
     "quick_links": "Accesos rápidos"
@@ -35,6 +37,8 @@
     "title": "Selecciona tu edad",
     "birth": "Fecha de nacimiento",
     "next": "Continuar",
+    "age_label": "Tu edad",
+    "years": "años",
     "CHILD": "Modo niños",
     "ADULT": "Modo adultos",
     "ELDER": "Modo mayores",
@@ -46,7 +50,7 @@
     "rol": "Tipo de profesional",
     "especialidad": "Especialidad",
     "idioma": "Idioma",
-    "minExp": "Experiencia mínima (años)",
+    "minExp": "Experiencia (años)",
     "radius": "Radio (km)",
     "apply": "Aplicar filtros",
     "reset": "Limpiar",
@@ -100,8 +104,9 @@
     "login_error": "Correo o contraseña incorrectos.",
     "no_account": "¿No tienes cuenta?",
     "have_account": "¿Ya tienes cuenta?",
-    "guardian_title": "Registro de un niño o niña (0–12)",
+    "guardian_title": "Registro de un niño o niña (8–12)",
     "guardian_desc": "Un tutor debe crear su cuenta y aceptar la vinculación.",
+    "guardian_tutor": "Tutor:",
     "guardian_consent": "Soy el tutor legal y doy mi consentimiento",
     "guardian_cta": "Registrar y vincular",
     "email_exists": "Este correo ya está registrado."

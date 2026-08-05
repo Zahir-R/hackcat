@@ -41,63 +41,59 @@ function fmt(s: string) {
     <h1>{{ t('perfil.title') }}</h1>
 
     <div class="card">
-      <div class="spread">
+      <div class="flex justify-between items-center gap-3 flex-wrap">
         <div>
           <strong>{{ user.displayName }}</strong>
-          <div class="muted">{{ user.email }}</div>
-          <div class="muted">{{ t('modo.' + user.ageMode) }}</div>
+          <div class="text-muted text-sm">{{ user.email }}</div>
+          <div class="text-muted text-sm">{{ t('modo.' + user.ageMode) }}</div>
         </div>
-        <button @click="editing = !editing">{{ editing ? t('perfil.save') : t('perfil.edit') }}</button>
+        <button class="btn" @click="editing = !editing">{{ editing ? t('perfil.save') : t('perfil.edit') }}</button>
       </div>
 
       <form v-if="editing" @submit.prevent="save">
         <label>{{ t('auth.name') }}
-          <input v-model="form.displayName" required />
+          <input v-model="form.displayName" class="input" required />
         </label>
         <label>{{ t('auth.phone') }}
-          <input v-model="form.phone" type="tel" />
+          <input v-model="form.phone" type="tel" class="input" />
         </label>
         <label>{{ t('auth.birth') }}
-          <input v-model="form.birthDate" type="date" required />
+          <AgeSlider :model-value="form.birthDate" @update:model-value="v => form.birthDate = v" />
         </label>
-        <button class="primary" type="submit">{{ t('perfil.save') }}</button>
+        <button class="btn btn-primary" type="submit">{{ t('perfil.save') }}</button>
       </form>
     </div>
 
     <div class="card">
-      <div class="spread">
+      <div class="flex justify-between items-center gap-3 flex-wrap">
         <strong>{{ t('profesional.title') }}</strong>
-        <NuxtLink v-if="!isProfessional" to="/perfil/profesional" class="primary btn-link">
+        <NuxtLink v-if="!isProfessional" to="/perfil/profesional" class="no-underline font-semibold px-3 py-2 rounded-lg bg-primary text-white">
           {{ t('perfil.apply_professional') }}
         </NuxtLink>
       </div>
-      <p v-if="myApplication" class="mt">
+      <p v-if="myApplication" class="mt-4">
         <span class="badge" :class="myApplication.status === 'APPROVED' ? 'ok' : myApplication.status === 'REJECTED' ? 'bad' : 'warn'">
           {{ t(`perfil.status.${myApplication.status}`) }}
         </span>
-        <span v-if="myApplication.rejectionReason" class="muted"> — {{ myApplication.rejectionReason }}</span>
+        <span v-if="myApplication.rejectionReason" class="text-muted text-sm"> — {{ myApplication.rejectionReason }}</span>
       </p>
-      <p v-if="myApplication?.status === 'REJECTED'" class="mt">
-        <NuxtLink to="/perfil/profesional" class="btn-link">{{ t('perfil.resubmit') }}</NuxtLink>
+      <p v-if="myApplication?.status === 'REJECTED'" class="mt-4">
+        <NuxtLink to="/perfil/profesional" class="no-underline font-semibold text-primary-ink">{{ t('perfil.resubmit') }}</NuxtLink>
       </p>
     </div>
 
     <div class="card">
       <h2>{{ t('perfil.bookings') }}</h2>
-      <div v-if="!myBookings.length" class="muted">—</div>
-      <div v-for="b in myBookings" :key="b.id" class="spread" style="border-bottom: 1px solid var(--color-border); padding: 0.5rem 0">
+      <div v-if="!myBookings.length" class="text-muted text-sm">—</div>
+      <div v-for="b in myBookings" :key="b.id" class="flex justify-between items-center gap-3 flex-wrap border-b border-border py-2">
         <div>
           <strong>{{ b.professionalName }}</strong>
-          <div class="muted">{{ fmt(b.startsAt) }} · {{ t(`especialistas.${b.modality === 'VISIT' ? 'visit' : b.modality === 'VOICE' ? 'voice' : 'video'}`) }}</div>
+          <div class="text-muted text-sm">{{ fmt(b.startsAt) }} · {{ t(`especialistas.${b.modality === 'VISIT' ? 'visit' : b.modality === 'VOICE' ? 'voice' : 'video'}`) }}</div>
         </div>
         <span class="badge" :class="b.status === 'CONFIRMED' ? 'ok' : b.status === 'CANCELLED' ? 'bad' : 'warn'">{{ b.status }}</span>
       </div>
     </div>
 
-    <button class="danger" @click="logout(); navigateTo('/')">{{ t('nav.salir') }}</button>
+    <button class="btn btn-danger" @click="logout(); navigateTo('/')">{{ t('nav.salir') }}</button>
   </div>
 </template>
-
-<style scoped>
-.btn-link { text-decoration: none; font-weight: 600; padding: 0.4rem 0.8rem; border-radius: 8px; background: var(--color-primary); color: #fff; }
-</style>

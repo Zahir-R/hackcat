@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Justicia Cerca"
+    "name": "Normalizer"
   },
   "nav": {
     "inicio": "Qallariy",
@@ -8,6 +8,8 @@
     "especialistas": "Yanapaqkuna",
     "comunidad": "Comunidad",
     "emergencias": "Urgentekuna",
+    "admin": "Administración",
+    "perfil": "Perfil",
     "ingresar": "Yaykuy",
     "salir": "Lluqsiy"
   },
@@ -18,7 +20,7 @@
     "modes": {
       "CHILD": {
         "label": "Wawakuna",
-        "desc": "0–12 watakuna"
+        "desc": "8–12 watakuna"
       },
       "ADULT": {
         "label": "Hatun runakuna",
@@ -26,7 +28,7 @@
       },
       "ELDER": {
         "label": "Machu runakuna",
-        "desc": "65+ watakuna"
+        "desc": "65–100 watakuna"
       }
     },
     "quick_links": "Usqhay ruraykuna"
@@ -35,6 +37,8 @@
     "title": "Wataykita akllay",
     "birth": "Paqarisqa p'unchaw",
     "next": "Qatiy",
+    "age_label": "Watayki",
+    "years": "wata",
     "CHILD": "Wawakuna modo",
     "ADULT": "Hatun runa modo",
     "ELDER": "Machu modo",
@@ -46,7 +50,7 @@
     "rol": "Yanapaq laya",
     "especialidad": "Especialidad",
     "idioma": "Simi",
-    "minExp": "Musuq experiencia (watakuna)",
+    "minExp": "Experiencia (watakuna)",
     "radius": "Radio (km)",
     "apply": "Chulluta ch'uyanachiy",
     "reset": "Pichay",
@@ -100,8 +104,9 @@
     "login_error": "Correo utaq contraseña pantasqa.",
     "no_account": "¿Cuenta mana kaptiyki?",
     "have_account": "¿Cuenta kaptiyki?",
-    "guardian_title": "Wawa registru (0–12)",
+    "guardian_title": "Wawa registru (8–12)",
     "guardian_desc": "Tutorniyki cuenta ruwanan kachkan.",
+    "guardian_tutor": "Tutor:",
     "guardian_consent": "Tutor kani, consentimientota quni",
     "guardian_cta": "Registraytaq vinculaytaq",
     "email_exists": "Kay correoqa ña registrasqa kachkan."

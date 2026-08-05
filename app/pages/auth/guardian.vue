@@ -14,14 +14,14 @@ function submit() {
 </script>
 
 <template>
-  <div class="auth-wrap">
-    <div class="card">
+  <div class="flex justify-center pt-4">
+    <div class="card w-[min(440px,100%)]">
       <h1>{{ t('auth.guardian_title') }}</h1>
       <p>{{ t('auth.guardian_desc') }}</p>
-      <p v-if="user" class="muted">Tutor: {{ user.displayName }}</p>
+      <p v-if="user" class="text-muted text-sm">{{ t('auth.guardian_tutor') }} {{ user.displayName }}</p>
 
       <label>{{ t('profesional.languages') }}
-        <select v-model="relationship">
+        <select v-model="relationship" class="input">
           <option value="tutor_legal">Tutor legal</option>
           <option value="padre">Padre</option>
           <option value="madre">Madre</option>
@@ -29,19 +29,12 @@ function submit() {
         </select>
       </label>
 
-      <label class="check">
-        <input v-model="consent" type="checkbox" />
+      <label class="flex items-center gap-2 font-normal">
+        <input v-model="consent" type="checkbox" class="w-auto min-h-6" />
         {{ t('auth.guardian_consent') }}
       </label>
 
-      <button class="primary" :disabled="!consent" @click="submit">{{ t('auth.guardian_cta') }}</button>
+      <button class="btn btn-primary" :disabled="!consent" @click="submit">{{ t('auth.guardian_cta') }}</button>
     </div>
   </div>
 </template>
-
-<style scoped>
-.auth-wrap { display: flex; justify-content: center; padding-top: 1rem; }
-.auth-wrap .card { width: min(440px, 100%); }
-.check { display: flex; gap: 0.5rem; align-items: center; font-weight: 400; }
-.check input { width: auto; min-height: 24px; }
-</style>

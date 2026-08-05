@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import tailwindcss from '@tailwindcss/vite'
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
@@ -9,14 +11,18 @@ export default defineNuxtConfig({
   ],
   css: ['~/assets/css/main.css'],
 
+  vite: {
+    plugins: [tailwindcss()],
+  },
+
   app: {
     head: {
-      title: 'Justicia Cerca',
+      title: 'Normalizer',
       htmlAttrs: { lang: 'es' },
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'theme-color', content: '#0f5c4d' },
+        { name: 'theme-color', content: '#8C3B1B' },
       ],
       link: [{ rel: 'icon', href: '/favicon.ico' }],
     },
@@ -49,11 +55,11 @@ export default defineNuxtConfig({
     registerType: 'autoUpdate',
     includeAssets: ['favicon.ico'],
     manifest: {
-      name: 'Justicia Cerca',
-      short_name: 'Justicia',
+      name: 'Normalizer',
+      short_name: 'Normalizer',
       description: 'Conexión ciudadana con profesionales de apoyo jurídico y psicosocial',
-      theme_color: '#0f5c4d',
-      background_color: '#f6f7f4',
+      theme_color: '#8C3B1B',
+      background_color: '#F4E1C1',
       display: 'standalone',
       lang: 'es',
       icons: [],

@@ -11,6 +11,12 @@ export function ageInYears(birthDate: string): number {
   return age
 }
 
+export function birthDateFromAge(age: number): string {
+  const now = new Date()
+  const d = new Date(now.getFullYear() - age, now.getMonth(), now.getDate())
+  return d.toISOString().slice(0, 10)
+}
+
 export function deriveAgeMode(birthDate: string): AgeMode {
   const age = ageInYears(birthDate)
   if (age <= AGE_BOUNDARIES.CHILD_MAX) return 'CHILD'
@@ -30,7 +36,13 @@ export const useAgeMode = () => {
     profile.value = { ...(profile.value ?? emptyProfile()), birthDate: value, ageMode: mode }
   }
 
-  return { profile, birthDate, ageMode, setBirthDate }
+  function setAge(age: number) {
+    setBirthDate(birthDateFromAge(age))
+  }
+
+  const age = computed<number>(() => ageInYears(birthDate.value))
+
+  return { profile, birthDate, age, ageMode, setBirthDate, setAge }
 }
 
 function emptyProfile(): Profile {

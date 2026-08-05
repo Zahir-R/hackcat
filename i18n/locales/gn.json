@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Justicia Cerca"
+    "name": "Normalizer"
   },
   "nav": {
     "inicio": "Ñepyrũ",
@@ -8,6 +8,8 @@
     "especialistas": "Mba'eporãhára",
     "comunidad": "Aty",
     "emergencias": "Emergencia",
+    "admin": "Administración",
+    "perfil": "Perfil",
     "ingresar": "Ñepyrũ",
     "salir": "Sẽ"
   },
@@ -18,7 +20,7 @@
     "modes": {
       "CHILD": {
         "label": "Mitãngue",
-        "desc": "0–12 ary"
+        "desc": "8–12 ary"
       },
       "ADULT": {
         "label": "Ava guasu",
@@ -26,7 +28,7 @@
       },
       "ELDER": {
         "label": "Itujaváva",
-        "desc": "65+ ary"
+        "desc": "65–100 ary"
       }
     },
     "quick_links": "Aguijereko"
@@ -35,6 +37,8 @@
     "title": "Eiporavo nde edad",
     "birth": "Ára de ñemano",
     "next": "Señor",
+    "age_label": "Nde edad",
+    "years": "ary",
     "CHILD": "Modo mitã",
     "ADULT": "Modo ava guasu",
     "ELDER": "Modo itujaváva",
@@ -100,8 +104,9 @@
     "login_error": "Correo térã contraseña naiporãi.",
     "no_account": "¿Nda rekuái cuenta?",
     "have_account": "¿Reguereko cuenta?",
-    "guardian_title": "Registro mitã (0–12)",
+    "guardian_title": "Registro mitã (8–12)",
     "guardian_desc": "Ñangareko va'erã omoñepyrũ cuenta.",
+    "guardian_tutor": "Ñangareko:",
     "guardian_consent": "Che ñangareko, ahechauka consentimiento",
     "guardian_cta": "Rejapota ha jokupyty",
     "email_exists": "Ko correo ñepyrũmba'e oĩma."

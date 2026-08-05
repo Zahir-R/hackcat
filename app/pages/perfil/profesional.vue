@@ -2,6 +2,7 @@
 import type { Ref } from 'vue'
 const { t } = useI18n()
 const { applyProfessional, myApplication, isLoggedIn } = useAuth()
+const { roles: roleOptions, roleLabel, specialtyLabel, languageLabel } = useCatalog()
 
 const headline = ref('')
 const bio = ref('')
@@ -12,7 +13,6 @@ const specialties = ref<string[]>([])
 const languages = ref<string[]>([])
 const submitted = ref(false)
 
-const roleOptions = ['abogado', 'psicologo', 'trabajador_social', 'traductor', 'paralegal']
 const specialtyByRole: Record<string, string[]> = {
   abogado: ['familia', 'pensiones', 'laboral', 'penal', 'violencia'],
   psicologo: ['infancia', 'violencia', 'duelo', 'familiar'],
@@ -54,28 +54,28 @@ function submit() {
 </script>
 
 <template>
-  <div class="wrap">
+  <div class="max-w-[640px] mx-auto">
     <h1>{{ t('profesional.title') }}</h1>
     <p v-if="myApplication?.status === 'PENDING'" class="badge warn">{{ t('profesional.pending_hint') }}</p>
 
     <form v-if="!submitted && myApplication?.status !== 'APPROVED'" class="card" @submit.prevent="submit">
       <label>{{ t('profesional.headline') }}
-        <input v-model="headline" required />
+        <input v-model="headline" class="input" required />
       </label>
       <label>{{ t('profesional.bio') }}
-        <textarea v-model="bio" rows="3" required />
+        <textarea v-model="bio" rows="3" class="input" required />
       </label>
-      <div class="grid grid-2">
+      <div class="grid gap-4 grid-cols-[repeat(auto-fill,minmax(260px,1fr))]">
         <label>{{ t('profesional.exp') }}
-          <input v-model.number="experienceYears" type="number" min="0" max="60" />
+          <input v-model.number="experienceYears" type="number" min="0" max="60" class="input" />
         </label>
         <label>{{ t('profesional.city') }}
-          <input v-model="city" />
+          <input v-model="city" class="input" />
         </label>
       </div>
 
       <label>{{ t('profesional.roles') }}</label>
-      <div class="chips">
+      <div class="flex flex-wrap gap-1 mt-1">
         <button
           v-for="r in roleOptions"
           :key="r"
@@ -83,12 +83,12 @@ function submit() {
           class="chip-tag"
           :class="{ active: roles.includes(r) }"
           @click="toggle(roles, r)"
-        >{{ r }}</button>
+        >{{ roleLabel(r) }}</button>
       </div>
 
       <template v-if="availableSpecialties.length">
         <label>{{ t('profesional.specialties') }}</label>
-        <div class="chips">
+        <div class="flex flex-wrap gap-1 mt-1">
           <button
             v-for="s in availableSpecialties"
             :key="s"
@@ -96,12 +96,12 @@ function submit() {
             class="chip-tag"
             :class="{ active: specialties.includes(s) }"
             @click="toggle(specialties, s)"
-          >{{ s }}</button>
+          >{{ specialtyLabel(s) }}</button>
         </div>
       </template>
 
       <label>{{ t('profesional.languages') }}</label>
-      <div class="chips">
+      <div class="flex flex-wrap gap-1 mt-1">
         <button
           v-for="l in languageOptions"
           :key="l"
@@ -109,25 +109,19 @@ function submit() {
           class="chip-tag"
           :class="{ active: languages.includes(l) }"
           @click="toggle(languages, l)"
-        >{{ l }}</button>
+        >{{ languageLabel(l) }}</button>
       </div>
 
       <label>{{ t('profesional.cv') }}
-        <input type="file" accept="application/pdf" />
+        <input type="file" accept="application/pdf" class="input" />
       </label>
 
-      <button class="primary mt" type="submit">{{ t('profesional.submit') }}</button>
+      <button class="btn btn-primary mt-4" type="submit">{{ t('profesional.submit') }}</button>
     </form>
 
     <div v-else class="card">
       <p v-if="submitted" class="badge warn">{{ t('profesional.pending_hint') }}</p>
-      <NuxtLink to="/perfil" class="btn-link">{{ t('comunidad.back') }}</NuxtLink>
+      <NuxtLink to="/perfil" class="no-underline font-semibold text-primary-ink">{{ t('comunidad.back') }}</NuxtLink>
     </div>
   </div>
 </template>
-
-<style scoped>
-.wrap { max-width: 640px; margin: 0 auto; }
-.chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.3rem; }
-.btn-link { text-decoration: none; font-weight: 600; color: var(--color-primary); }
-</style>

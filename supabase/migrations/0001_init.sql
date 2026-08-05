@@ -1,4 +1,4 @@
--- Justicia Cerca — schema inicial (ver docs/SDD.md §4)
+-- Normalizer — schema inicial (ver docs/SDD.md §4)
 
 create extension if not exists postgis;
 

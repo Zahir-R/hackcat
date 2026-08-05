@@ -1,6 +1,6 @@
 # Especificación de Requisitos del Sistema (SRS)
 
-**Proyecto:** Plataforma de Acceso a la Justicia — Conexión Ciudadana–Profesional ("Justicia Cerca")
+**Proyecto:** Plataforma de Acceso a la Justicia — Conexión Ciudadana–Profesional ("Normalizer")
 **Estándar de Referencia:** IEEE Std 830-1998 / ISO/IEC/IEEE 29148:2018
 **Dominio:** Acceso a la Justicia / LegalTech
 **Entorno de Despliegue Target:** PWA (Client-Side Rendering) + Backend SaaS (Supabase)
@@ -12,7 +12,7 @@
 
 ### 1.1 Propósito
 
-Este documento especifica los requisitos funcionales, no funcionales, de arquitectura e interfaz de la **Plataforma de Acceso a la Justicia** ("Justicia Cerca"): una PWA que conecta a ciudadanos bolivianos (con foco inicial en Sucre, Chuquisaca) con profesionales de apoyo jurídico y psicosocial verificados, organizada en **tres modos por edad** (niños, adultos, personas mayores). La plataforma incluye geolocalización y mapa de especialistas, reservas de visitas y llamadas, un foro comunitario, un botón de emergencias y un asistente conversacional **determinista** basado en FAQ llamado **"Ramon"**.
+Este documento especifica los requisitos funcionales, no funcionales, de arquitectura e interfaz de la **Plataforma de Acceso a la Justicia** ("Normalizer"): una PWA que conecta a ciudadanos bolivianos (con foco inicial en Sucre, Chuquisaca) con profesionales de apoyo jurídico y psicosocial verificados, organizada en **tres modos por edad** (niños, adultos, personas mayores). La plataforma incluye geolocalización y mapa de especialistas, reservas de visitas y llamadas, un foro comunitario, un botón de emergencias y un asistente conversacional **determinista** basado en FAQ llamado **"Ramon"**.
 
 El objetivo es guiar la implementación de un prototipo navegable y ejecutable durante la hackathon, priorizando costo bajo (capital semilla Bs. 9.500), sin dependencia de APIs de LLM.
 
@@ -20,7 +20,7 @@ El objetivo es guiar la implementación de un prototipo navegable y ejecutable d
 
 El sistema permite:
 
-1. **Registro por edad:** Creación de perfil con selector de edad tipo *scroller*; el sistema deriva el **modo de la aplicación** (Niños 0–12, Adultos 13–64, Mayores 65+) y adapta la interfaz y los flujos.
+1. **Registro por edad:** Creación de perfil con selector de edad tipo *slider* (8–100 años); el sistema deriva el **modo de la aplicación** (Niños 8–12, Adultos 13–64, Mayores 65–100) y adapta la interfaz y los flujos.
 2. **Profesionales verificados:** Ciudadanos que sean profesionales de apoyo (abogados, psicólogos, trabajadores sociales, traductores/intérpretes, paralegales) completan un perfil profesional con currículum; un administrador lo aprueba o rechaza.
 3. **Geolocalización y mapa:** Búsqueda de profesionales cercanos sobre un mapa con filtros por idiomas (incluida lengua de señas boliviana), experiencia y especialidad.
 4. **Reservas:** Programación de **visitas presenciales, llamadas de voz o videollamadas** con profesionales (agenda por franjas horarias, sin llamadas dentro de la plataforma).
@@ -86,7 +86,7 @@ El sistema es una PWA híbrida:
 
 ### 2.2 Funciones del Producto
 
-- **Modo por edad:** registro con scroller de edad; derivación de modo (0–12 / 13–64 / 65+); UI y contenido adaptados.
+- **Modo por edad:** registro con slider de edad (8–100); derivación de modo (8–12 / 13–64 / 65–100); UI y contenido adaptados.
 - **Perfil ciudadano:** datos personales, preferencia de idioma, contactos de emergencia.
 - **Flujo de tutor para menores:** consentimiento y vinculación tutor–menor.
 - **Perfil profesional:** solicitud con currículum, aprobación por administrador, rol/especialidades/idiomas auto-asignados.
@@ -101,9 +101,9 @@ El sistema es una PWA híbrida:
 
 | Actor | Descripción | Necesidades |
 |---|---|---|
-| Ciudadano niño (0–12) | Menor de edad; registrado y acompañado por un tutor | Interfaz sencilla, acceso al mapa/especialistas bajo supervisión del tutor, contenido de Ramon adecuado a su edad |
+| Ciudadano niño (8–12) | Menor de edad; registrado y acompañado por un tutor | Interfaz sencilla, acceso al mapa/especialistas bajo supervisión del tutor, contenido de Ramon adecuado a su edad |
 | Ciudadano adulto (13–64) | Usuario principal | Búsqueda, reservas, foro, Ramon |
-| Persona mayor (65+) | Usuario con posible limitación visual/motriz | Tipografía grande, alto contraste, área de toque ≥48px, flujos guiados |
+| Persona mayor (65–100) | Usuario con posible limitación visual/motriz | Tipografía grande, alto contraste, área de toque ≥48px, flujos guiados |
 | Tutor | Adulto que registra/consiente a un menor | Vinculación con el perfil del menor, control del consentimiento |
 | Profesional | Abogado, psicólogo, trabajador social, traductor, paralegal | Perfil profesional, agenda, confirmación de reservas |
 | Administrador | Miembro del equipo | Panel de aprobación, moderación, gestión de FAQ |
@@ -112,9 +112,9 @@ El sistema es una PWA híbrida:
 
 | Modo | Rango | Derivación | Comportamiento |
 |---|---|---|---|
-| `CHILD` | 0–12 | `birth_date` | Requiere tutor; contenido adaptado; reservas gestionadas por el tutor |
+| `CHILD` | 8–12 | `birth_date` | Requiere tutor; contenido adaptado; reservas gestionadas por el tutor |
 | `ADULT` | 13–64 | `birth_date` | Flujo completo sin tutela |
-| `ELDER` | 65+ | `birth_date` | Interfaz de accesibilidad reforzada (tipografía, contraste) |
+| `ELDER` | 65–100 | `birth_date` | Interfaz de accesibilidad reforzada (tipografía, contraste) |
 
 La derivación es una **regla de negocio** (no un campo editable): `age_mode = f(birth_date, fecha actual)`.
 
@@ -166,7 +166,7 @@ La derivación es una **regla de negocio** (no un campo editable): `age_mode = f
 
 ### 4.2 Módulo 1: Autenticación y Perfiles
 
-- **RF-1.1:** El registro debe incluir un **scroller de edad** (año y/o fecha de nacimiento) y credenciales email/contraseña.
+- **RF-1.1:** El registro debe incluir un **slider de edad** (8–100 años) y credenciales email/contraseña.
 - **RF-1.2:** Durante el registro, el usuario debe indicar mediante **casilla de verificación** si es profesional.
 - **RF-1.3:** El sistema debe derivar el `age_mode` de la fecha de nacimiento (0–12 → `CHILD`, 13–64 → `ADULT`, 65+ → `ELDER`).
 - **RF-1.4:** Si `age_mode = CHILD`, el registro **debe** requerir un tutor: el tutor crea su cuenta (adulta) y vincula al menor con consentimiento explícito.
@@ -254,7 +254,7 @@ La derivación es una **regla de negocio** (no un campo editable): `age_mode = f
 - **Precondiciones:** Ninguna.
 - **Flujo principal:**
   1. El usuario abre la app y selecciona "Registrarse".
-  2. Ingresa su edad con el scroller y sus datos (email, contraseña, nombre, fecha de nacimiento).
+  2. Ingresa su edad con el slider (8–100) y sus datos (email, contraseña, nombre, fecha de nacimiento).
   3. El sistema deriva `age_mode`.
   4. **Si `CHILD`:** el sistema solicita los datos del tutor; el tutor crea su cuenta y acepta el consentimiento de vinculación.
   5. El sistema crea el perfil y envía email de verificación.
@@ -321,7 +321,7 @@ La derivación es una **regla de negocio** (no un campo editable): `age_mode = f
 - **Precondiciones:** Ninguna.
 - **Flujo principal:**
   1. El tutor inicia el registro de un menor.
-  2. Captura los datos del menor (edad con scroller) y crea/usa su cuenta de tutor.
+  2. Captura los datos del menor (edad con slider, 8–100) y crea/usa su cuenta de tutor.
   3. Otorga consentimiento de vinculación.
   4. El sistema crea el perfil `CHILD` vinculado al tutor.
   5. El menor accede a la app en modo `CHILD` bajo el perfil del tutor.
@@ -475,7 +475,7 @@ La derivación es una **regla de negocio** (no un campo editable): `age_mode = f
 | Idea original (`bare_ideas.txt`) | Cobertura en SRS |
 |---|---|
 | 3 apps (niños, adultos, mayores) | Modos por edad (RF-1.3, §2.4) |
-| Perfil con scroller de edad | RF-1.1 |
+| Perfil con slider de edad | RF-1.1 |
 | Checkbox "soy profesional" | RF-1.2 |
 | Redirección a perfil profesional con CV | RF-1.6, RF-2.1 |
 | Aprobación por admin | RF-2.4, RF-2.5, UC-03 |

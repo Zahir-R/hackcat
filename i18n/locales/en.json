@@ -1,6 +1,6 @@
 {
   "app": {
-    "name": "Justicia Cerca"
+    "name": "Normalizer"
   },
   "nav": {
     "inicio": "Home",
@@ -8,6 +8,8 @@
     "especialistas": "Specialists",
     "comunidad": "Community",
     "emergencias": "Emergencies",
+    "admin": "Administration",
+    "perfil": "Profile",
     "ingresar": "Sign in",
     "salir": "Sign out"
   },
@@ -18,7 +20,7 @@
     "modes": {
       "CHILD": {
         "label": "Children",
-        "desc": "0–12 years"
+        "desc": "8–12 years"
       },
       "ADULT": {
         "label": "Adults",
@@ -26,7 +28,7 @@
       },
       "ELDER": {
         "label": "Older adults",
-        "desc": "65+ years"
+        "desc": "65–100 years"
       }
     },
     "quick_links": "Quick links"
@@ -35,6 +37,8 @@
     "title": "Select your age",
     "birth": "Date of birth",
     "next": "Continue",
+    "age_label": "Your age",
+    "years": "years",
     "CHILD": "Children mode",
     "ADULT": "Adult mode",
     "ELDER": "Senior mode",
@@ -46,7 +50,7 @@
     "rol": "Type",
     "especialidad": "Specialty",
     "idioma": "Language",
-    "minExp": "Min. experience (years)",
+    "minExp": "Experience (years)",
     "radius": "Radius (km)",
     "apply": "Apply filters",
     "reset": "Clear",
@@ -100,8 +104,9 @@
     "login_error": "Incorrect email or password.",
     "no_account": "No account?",
     "have_account": "Already have an account?",
-    "guardian_title": "Registering a child (0–12)",
+    "guardian_title": "Registering a child (8–12)",
     "guardian_desc": "A guardian must create their account and accept the link.",
+    "guardian_tutor": "Guardian:",
     "guardian_consent": "I am the legal guardian and I give my consent",
     "guardian_cta": "Register and link",
     "email_exists": "This email is already registered."

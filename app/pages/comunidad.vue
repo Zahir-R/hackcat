@@ -35,35 +35,30 @@ function fmt(s: string) {
 
 <template>
   <div>
-    <div class="spread">
+    <div class="flex justify-between items-center gap-3 flex-wrap">
       <h1>{{ t('comunidad.title') }}</h1>
-      <button v-if="isLoggedIn" class="primary" @click="showForm = !showForm">{{ t('comunidad.new_topic') }}</button>
+      <button v-if="isLoggedIn" class="btn btn-primary" @click="showForm = !showForm">{{ t('comunidad.new_topic') }}</button>
     </div>
 
     <form v-if="showForm" class="card" @submit.prevent="createTopic">
       <label>{{ t('comunidad.new_topic') }}
-        <input v-model="title" />
+        <input v-model="title" class="input" />
       </label>
       <label>{{ t('comunidad.post') }}
-        <textarea v-model="body" rows="3" />
+        <textarea v-model="body" rows="3" class="input" />
       </label>
-      <button class="primary mt" type="submit">{{ t('comunidad.post') }}</button>
+      <button class="btn btn-primary mt-4" type="submit">{{ t('comunidad.post') }}</button>
     </form>
 
-    <div v-for="tp in topics" :key="tp.id" class="card topic">
-      <NuxtLink :to="`/comunidad/${tp.id}`" class="topic-title">
+    <div v-for="tp in topics" :key="tp.id" class="card">
+      <NuxtLink :to="`/comunidad/${tp.id}`" class="font-bold text-lg text-text no-underline hover:text-primary-ink">
         {{ tp.title }}
         <span v-if="tp.status === 'LOCKED'" class="badge warn">{{ t('comunidad.locked') }}</span>
       </NuxtLink>
-      <p class="muted">{{ tp.body }}</p>
-      <div class="muted">
+      <p class="text-muted text-sm">{{ tp.body }}</p>
+      <div class="text-muted text-sm">
         {{ tp.authorName }} · {{ fmt(tp.createdAt) }} · {{ tp.replies.length }} {{ t('comunidad.replies') }}
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-.topic-title { font-weight: 700; font-size: 1.05rem; color: var(--color-text); text-decoration: none; }
-.topic-title:hover { color: var(--color-primary); }
-</style>

@@ -86,60 +86,61 @@ const activeItem = computed(() => view.value === 'answer' && selectedItem.value 
 
 <template>
   <Teleport to="body">
-    <div class="ramon-widget">
+    <div class="fixed right-4 bottom-4 z-[2000]">
       <Transition name="pop">
-        <div v-if="open" class="ramon-panel card">
-          <div class="ramon-head">
+        <div v-if="open" class="card w-[min(380px,calc(100vw-2rem))] mb-2.5 flex flex-col p-0 overflow-hidden max-h-[min(70vh,560px)]">
+          <div class="flex justify-between items-center px-4 py-2.5 bg-primary text-white">
             <strong>🤖 {{ t('ramon.name') }}</strong>
-            <button class="icon-btn" @click="open = false" aria-label="Cerrar">✕</button>
+            <button class="border-none bg-transparent text-white min-h-9" @click="open = false" aria-label="Cerrar">✕</button>
           </div>
 
-          <div ref="panelBody" class="ramon-body">
-            <div v-for="(m, i) in messages" :key="i" class="msg" :class="m.role">
-              <div class="bubble">
-                <p>{{ m.content }}</p>
-                <NuxtLink v-if="m.link" :to="m.link.to" class="link-btn" @click="open = false">
+          <div ref="panelBody" class="p-3 overflow-y-auto flex-1">
+            <div v-for="(m, i) in messages" :key="i" class="flex mb-2" :class="m.role === 'user' ? 'justify-end' : 'justify-start'">
+              <div class="max-w-[85%] px-3 py-2.5 rounded-xl bg-[#F0D3A8] text-primary-dark">
+                <p class="m-0">{{ m.content }}</p>
+                <NuxtLink v-if="m.link" :to="m.link.to" class="inline-block mt-1 text-accent font-bold no-underline" @click="open = false">
                   {{ m.link.label }} →
                 </NuxtLink>
               </div>
             </div>
-            <div v-if="typing" class="msg assistant"><div class="bubble">…</div></div>
+            <div v-if="typing" class="flex justify-start mb-2"><div class="max-w-[85%] px-3 py-2.5 rounded-xl bg-[#F0D3A8] text-primary-dark">…</div></div>
 
-            <div class="ramon-actions">
-              <div v-if="view === 'menu'" class="ramon-menu">
-                <button v-for="c in categories" :key="c.id" class="chip-tag" @click="openCategory(c.id)">
+            <div class="mt-1">
+              <div v-if="view === 'menu'" class="flex flex-col gap-1">
+                <button v-for="c in categories" :key="c.id" class="chip-tag text-left min-h-11" @click="openCategory(c.id)">
                   {{ c.label }}
                 </button>
               </div>
-              <div v-else-if="view === 'category'" class="ramon-menu">
-                <button class="chip-tag" @click="backToMenu">← {{ t('ramon.back') }}</button>
+              <div v-else-if="view === 'category'" class="flex flex-col gap-1">
+                <button class="chip-tag text-left min-h-11" @click="backToMenu">← {{ t('ramon.back') }}</button>
                 <button
                   v-for="it in currentItems"
                   :key="it.id"
-                  class="chip-tag"
+                  class="chip-tag text-left min-h-11"
                   @click="openItem(it)"
                 >
                   {{ it.question }}
                 </button>
               </div>
-              <div v-else class="ramon-menu">
-                <button class="chip-tag" @click="backToMenu">← {{ t('ramon.back') }}</button>
+              <div v-else class="flex flex-col gap-1">
+                <button class="chip-tag text-left min-h-11" @click="backToMenu">← {{ t('ramon.back') }}</button>
               </div>
             </div>
           </div>
 
-          <form class="ramon-input" @submit.prevent="askText">
+          <form class="flex gap-1 p-2.5 border-t border-border" @submit.prevent="askText">
             <input
               v-model="input"
+              class="input min-h-11"
               :placeholder="t('ramon.placeholder')"
               :disabled="typing"
             />
-            <button class="primary" type="submit" :disabled="typing">➤</button>
+            <button class="btn btn-primary min-h-11 min-w-11" type="submit" :disabled="typing">➤</button>
           </form>
         </div>
       </Transition>
 
-      <button class="ramon-fab accent" @click="open = !open" aria-label="Abrir Ramon">
+      <button class="btn btn-accent rounded-full shadow-card font-bold float-right" @click="open = !open" aria-label="Abrir Ramon">
         <span v-if="!open">🤖 {{ t('ramon.name') }}</span>
         <span v-else>✕</span>
       </button>
@@ -148,51 +149,6 @@ const activeItem = computed(() => view.value === 'answer' && selectedItem.value 
 </template>
 
 <style scoped>
-.ramon-widget { position: fixed; right: 1rem; bottom: 1rem; z-index: 100; }
-.ramon-fab {
-  border-radius: 999px;
-  box-shadow: var(--shadow);
-  font-weight: 700;
-  float: right;
-}
-.ramon-panel {
-  width: min(380px, calc(100vw - 2rem));
-  margin-bottom: 0.6rem;
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  overflow: hidden;
-  max-height: min(70vh, 560px);
-}
-.ramon-head {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 0.6rem 1rem;
-  background: var(--color-primary); color: #fff;
-}
-.icon-btn { border: none; background: none; color: #fff; min-height: 36px; }
-.ramon-body { padding: 0.8rem; overflow-y: auto; flex: 1; }
-.msg { display: flex; margin-bottom: 0.5rem; }
-.msg.assistant { justify-content: flex-start; }
-.msg.user { justify-content: flex-end; }
-.bubble {
-  max-width: 85%;
-  padding: 0.6rem 0.8rem;
-  border-radius: 12px;
-  background: #eef4f0;
-}
-.bubble p { margin: 0; }
-.msg.user .bubble { background: var(--color-primary); color: #fff; }
-.link-btn {
-  display: inline-block; margin-top: 0.4rem;
-  color: var(--color-accent); font-weight: 700; text-decoration: none;
-}
-.ramon-actions { margin-top: 0.4rem; }
-.ramon-menu { display: flex; flex-direction: column; gap: 0.4rem; }
-.ramon-menu .chip-tag { text-align: left; min-height: 44px; }
-.ramon-input { display: flex; gap: 0.4rem; padding: 0.6rem; border-top: 1px solid var(--color-border); }
-.ramon-input input { min-height: 44px; }
-.ramon-input button { min-height: 44px; min-width: 44px; }
-
 .pop-enter-active, .pop-leave-active { transition: all 0.2s ease; }
 .pop-enter-from, .pop-leave-to { opacity: 0; transform: translateY(10px); }
 </style>

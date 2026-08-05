@@ -10,13 +10,13 @@ const emit = defineEmits<{ (e: 'confirm'): void; (e: 'close'): void }>()
 <template>
   <Teleport to="body">
     <Transition name="fade">
-      <div v-if="open" class="overlay" @click.self="emit('close')">
-        <div class="modal card">
-          <h3>{{ title }}</h3>
+      <div v-if="open" class="fixed inset-0 bg-black/45 flex items-center justify-center z-[3000] p-4" @click.self="emit('close')">
+        <div class="card w-[min(420px,100%)]">
+          <h3 class="m-0">{{ title }}</h3>
           <p>{{ message }}</p>
-          <div class="row" style="justify-content: flex-end">
-            <button @click="emit('close')">{{ $t('emergencias.cancelar') }}</button>
-            <button class="primary" @click="emit('confirm')">{{ $t('emergencias.llamar') }}</button>
+          <div class="flex gap-3 items-center justify-end">
+            <button class="btn" @click="emit('close')">{{ $t('emergencias.cancelar') }}</button>
+            <button class="btn btn-primary" @click="emit('confirm')">{{ $t('emergencias.llamar') }}</button>
           </div>
         </div>
       </div>
@@ -25,11 +25,6 @@ const emit = defineEmits<{ (e: 'confirm'): void; (e: 'close'): void }>()
 </template>
 
 <style scoped>
-.overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.45);
-  display: flex; align-items: center; justify-content: center; z-index: 200; padding: 1rem;
-}
-.modal { width: min(420px, 100%); }
 .fade-enter-active, .fade-leave-active { transition: opacity 0.2s; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 </style>
