@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons'
+
 const { t } = useI18n()
 const route = useRoute()
 const id = route.params.id as string
@@ -34,7 +36,7 @@ async function confirmBooking() {
   const slot = slots.value.find(s => s.id === selectedSlot.value)
   if (!slot) return
   clearMessage()
-  await createBooking(id, slot, notes.value, '')
+  await createBooking(id, slot, notes.value)
   showConfirm.value = false
   navigateTo('/perfil')
 }
@@ -63,7 +65,7 @@ function fmt(s: string) {
         <span v-for="s in specialist.specialties" :key="s" class="pill">{{ specialtyLabel(s) }}</span>
         <span v-for="l in specialist.languages" :key="l" class="pill lang">{{ languageLabel(l) }}</span>
       </div>
-      <div class="text-muted text-sm mt-4">📍 {{ specialist.city }} · {{ specialist.experienceYears }} años de experiencia</div>
+      <div class="text-muted text-sm mt-4 inline-flex items-center gap-1.5"><FontAwesomeIcon :icon="faLocationDot" /> {{ specialist.city }} · {{ specialist.experienceYears }} años de experiencia</div>
     </div>
 
     <div class="card">

@@ -1,25 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #8C3B1B;
-  --color-primary-dark: #B06019;
-  --color-primary-ink: #8C3B1B;
-  --color-accent: #B5651D;
-  --color-accent-soft: #D9A05B;
-  --color-bg: #F4E1C1;
-  --color-surface: #FBEFDA;
+  --color-primary: #6F4A2F;
+  --color-primary-dark: #543620;
+  --color-primary-ink: #5A3A22;
+  --color-accent: #7C5A3C;
+  --color-accent-soft: #EDE3D5;
+  --color-bg: #FAF8F4;
+  --color-surface: #FFFFFF;
   --color-surface-hi: #FFFFFF;
-  --color-text: #5A2A1B;
-  --color-muted: #7A4E2E;
-  --color-border: #DFB983;
-  --color-danger: #B4432B;
+  --color-text: #2E241B;
+  --color-muted: #6E6257;
+  --color-border: #E5DCD1;
+  --color-danger: #B3402E;
   --color-ingresar-bg: #FFFFFF;
 
   --font-display: 'Lora', Georgia, 'Times New Roman', serif;
   --font-body: 'Karla', 'Segoe UI', system-ui, -apple-system, sans-serif;
 
-  --radius: 14px;
-  --shadow-card: 0 2px 10px rgba(90, 42, 27, 0.12);
+  --radius: 12px;
+  --shadow-card: 0 1px 2px rgba(46, 36, 27, 0.06), 0 1px 3px rgba(46, 36, 27, 0.07);
 }
 
 * { box-sizing: border-box; }
@@ -97,14 +97,14 @@ label { display: block; margin: 0.6rem 0 0.2rem; font-weight: 600; }
 
   .pill {
     display: inline-block;
-    background: #F0D3A8;
-    color: var(--color-primary-dark);
+    background: var(--color-accent-soft);
+    color: var(--color-primary-ink);
     border-radius: 999px;
     padding: 0.2rem 0.7rem;
     margin: 0.15rem;
     font-size: 0.85rem;
   }
-  .pill.lang { background: #fff6; color: var(--color-primary-dark); }
+  .pill.lang { background: var(--color-surface-hi); color: var(--color-primary-ink); }
 
   .badge {
     display: inline-block;
@@ -113,9 +113,9 @@ label { display: block; margin: 0.6rem 0 0.2rem; font-weight: 600; }
     font-size: 0.8rem;
     font-weight: 600;
   }
-  .badge.ok { background: #E1EDC7; color: #4A6B12; }
-  .badge.warn { background: #F7E2BC; color: #8C5A0E; }
-  .badge.bad { background: #F6D4CB; color: #B4432B; }
+  .badge.ok { background: #E4EACF; color: #55701F; }
+  .badge.warn { background: #F3E3C3; color: #7A5B14; }
+  .badge.bad { background: #F6D8D0; color: #B3402E; }
 
   .chip-tag {
     border-radius: 999px;
@@ -145,37 +145,34 @@ label { display: block; margin: 0.6rem 0 0.2rem; font-weight: 600; }
     border: none;
     text-align: center;
   }
-  .emergency.policia { background: #7A4E1E; }
-  .emergency.bomberos { background: #B5651D; }
+  .emergency.policia { background: var(--color-primary-dark); }
+  .emergency.bomberos { background: var(--color-accent); }
   .emergency.medicos { background: var(--color-danger); }
 
   .field-error { color: var(--color-danger); font-size: 0.85rem; margin-top: 0.2rem; }
+
+  .sp-marker-dot {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+    box-shadow: var(--shadow-card);
+    font-size: 1rem;
+  }
 }
 
 button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
-  outline: 3px solid var(--color-accent);
+  outline: 3px solid var(--color-primary);
   outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #2A1A12;
-    --color-surface: #3A2419;
-    --color-surface-hi: #472D20;
-    --color-text: #FBEFDA;
-    --color-muted: #C9A27E;
-    --color-border: #5C3B28;
-    --color-accent: #D9A05B;
-    --color-primary-ink: #FFF;
-    --shadow-card: 0 2px 10px rgba(0,0,0,0.4);
-    --color-primary-dark: #5A2A1B;
-    --color-ingresar-bg: #D9A05B;
-  }
-  .pill { background: #472D20; color: #F0D3A8; }
 }
 
 html[data-mode='ELDER'] { --font-base: 19px; }

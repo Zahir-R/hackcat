@@ -1,30 +1,36 @@
-import { addBooking, specialists } from '../data/mock'
+import { state } from '../data/state'
 import type { Booking } from '../../app/types'
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
-  const { slotId, modality, notes, clientName, startsAt } = body ?? {}
+  const email = String(body?.email ?? '').trim().toLowerCase()
+  const user = state.users.find(u => u.email === email)
+  if (!user) throw createError({ statusCode: 401, statusMessage: 'no_session' })
 
-  if (!slotId || !modality || !startsAt) {
-    throw createError({ statusCode: 400, statusMessage: 'Datos de reserva incompletos' })
+  const slotId = String(body?.slotId ?? '')
+  const slot = state.slots.find(s => s.id === slotId)
+  if (!slot) throw createError({ statusCode: 404, statusMessage: 'franja_no_encontrada' })
+  if (slot.isBooked || new Date(slot.startsAt).getTime() <= Date.now()) {
+    throw createError({ statusCode: 409, statusMessage: 'franja_ocupada' })
   }
 
-  const profId = String(slotId).replace(/^sl-/, '').split('-').slice(0, 2).join('-')
-  const professional = specialists.find(s => s.id === profId && s.status === 'APPROVED')
-  if (!professional) throw createError({ statusCode: 404, statusMessage: 'Profesional no encontrado' })
+  const prof = state.specialists.find(s => s.id === slot.professionalId)
+  if (!prof || prof.status !== 'APPROVED') {
+    throw createError({ statusCode: 404, statusMessage: 'Profesional no encontrado' })
+  }
 
-  // Deterministic mock: a slot is available if it has not been booked yet.
+  slot.isBooked = true
   const booking: Booking = {
     id: crypto.randomUUID(),
-    clientId: 'demo',
-    professionalId: professional.id,
-    professionalName: professional.name,
-    slotId,
-    startsAt,
-    modality,
+    clientId: user.id,
+    professionalId: prof.id,
+    professionalName: prof.name,
+    slotId: slot.id,
+    startsAt: slot.startsAt,
+    modality: slot.modality,
     status: 'PENDING',
-    notes: notes ?? '',
+    notes: String(body?.notes ?? ''),
   }
-  addBooking(booking)
+  state.bookings.push(booking)
   return booking
 })

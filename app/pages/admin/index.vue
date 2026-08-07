@@ -1,24 +1,47 @@
 <script setup lang="ts">
 const { t } = useI18n()
-const { isAdmin, applications, approve, reject } = useAuth()
+const { isAdmin, applications, refreshApplications, approve, reject, users, fetchUsers, deleteUser, restore } = useAuth()
 const { items, fetchFaq } = useFaq()
-const { roleLabel, languageLabel } = useCatalog()
+const { roleLabel, specialtyLabel, languageLabel } = useCatalog()
 
 const rejectId = ref<string | null>(null)
 const rejectReason = ref('')
+const busy = ref<string | null>(null)
+const deleteTarget = ref<string | null>(null)
+const deleting = ref<string | null>(null)
 
-onMounted(() => {
-  if (!isAdmin.value) navigateTo('/')
-  fetchFaq()
+onMounted(async () => {
+  await restore()
+  if (!isAdmin.value) {
+    navigateTo('/')
+    return
+  }
+  await refreshApplications()
+  await fetchFaq()
+  await fetchUsers()
 })
 
 const pending = computed(() => applications.value.filter(a => a.status === 'PENDING'))
 
 function confirmReject() {
   if (!rejectId.value) return
-  reject(rejectId.value, rejectReason.value)
+  void reject(rejectId.value, rejectReason.value)
   rejectId.value = null
   rejectReason.value = ''
+}
+
+async function approveOne(id: string) {
+  busy.value = id
+  await approve(id)
+  busy.value = null
+}
+
+async function confirmDelete() {
+  if (!deleteTarget.value || deleting.value) return
+  deleting.value = deleteTarget.value
+  await deleteUser(deleteTarget.value)
+  deleting.value = null
+  deleteTarget.value = null
 }
 
 const faqStats = computed(() => ({
@@ -39,14 +62,15 @@ const faqStats = computed(() => ({
       <div v-for="a in pending" :key="a.id" class="border-b border-border py-3 flex gap-4 justify-between items-start flex-wrap">
         <div>
           <strong>{{ a.headline }}</strong>
-          <div class="text-muted text-sm">{{ a.roles.map(roleLabel).join(', ') }} · {{ a.experienceYears }} años · {{ a.city }}</div>
+          <div class="text-muted text-sm">{{ a.name }} · {{ a.roles.map(roleLabel).join(', ') }} · {{ a.experienceYears }} años · {{ a.city }}</div>
           <p>{{ a.bio }}</p>
           <div>
-            <span v-for="l in a.languages" :key="l" class="pill">{{ languageLabel(l) }}</span>
+            <span v-for="s in a.specialties" :key="s" class="pill">{{ specialtyLabel(s) }}</span>
+            <span v-for="l in a.languages" :key="l" class="pill lang">{{ languageLabel(l) }}</span>
           </div>
         </div>
         <div class="flex gap-3 items-center flex-wrap">
-          <button class="btn btn-primary" @click="approve(a.id)">{{ t('admin.approve') }}</button>
+          <button class="btn btn-primary" :disabled="busy !== null" @click="approveOne(a.id)">{{ t('admin.approve') }}</button>
           <button class="btn btn-danger" @click="rejectId = a.id">{{ t('admin.reject') }}</button>
         </div>
       </div>
@@ -57,6 +81,30 @@ const faqStats = computed(() => ({
         </label>
         <button class="btn btn-danger mt-4" @click="confirmReject">{{ t('admin.reject') }}</button>
       </div>
+    </section>
+
+    <section class="card">
+      <h2>{{ t('admin.users') }}</h2>
+      <div v-if="!users.length" class="text-muted text-sm">{{ t('admin.no_users') }}</div>
+      <div v-for="u in users" :key="u.email" class="border-b border-border py-3 flex gap-4 justify-between items-center flex-wrap">
+        <div>
+          <strong>{{ u.displayName }}</strong>
+          <div class="text-muted text-sm">{{ u.email }}<span v-if="u.isProfessional" class="badge warn ml-2">{{ t('admin.is_pro') }}</span></div>
+        </div>
+        <button
+          class="btn btn-danger"
+          :disabled="deleting !== null || u.email === 'admin@justicia.bo'"
+          @click="deleteTarget = u.email"
+        >{{ t('admin.delete_user') }}</button>
+      </div>
+
+      <ModalConfirm
+        :open="deleteTarget !== null"
+        :title="t('admin.delete_user')"
+        :message="t('admin.delete_confirm', { email: deleteTarget ?? '' })"
+        @confirm="confirmDelete"
+        @close="deleteTarget = null"
+      />
     </section>
 
     <section class="card">

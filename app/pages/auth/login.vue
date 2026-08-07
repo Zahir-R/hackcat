@@ -1,16 +1,22 @@
 <script setup lang="ts">
 const { t } = useI18n()
-const { login } = useAuth()
+const { login, isAdmin } = useAuth()
 const email = ref('')
 const password = ref('')
 const error = ref('')
+const submitting = ref(false)
 
-function submit() {
+async function submit() {
+  if (submitting.value) return
+  submitting.value = true
+  error.value = ''
   try {
-    login(email.value, password.value)
-    navigateTo('/perfil')
-  } catch (e) {
+    await login(email.value, password.value)
+    navigateTo(isAdmin.value ? '/admin' : '/perfil')
+  } catch {
     error.value = t('auth.login_error')
+  } finally {
+    submitting.value = false
   }
 }
 </script>
@@ -26,11 +32,11 @@ function submit() {
         <input v-model="password" type="password" class="input" required />
       </label>
       <p v-if="error" class="field-error">{{ error }}</p>
-      <button class="btn btn-primary" type="submit">{{ t('auth.login_cta') }}</button>
-      <p class="text-muted text-sm mt-4">
+      <button class="btn btn-primary mt-2 w-full" type="submit" :disabled="submitting">{{ t('auth.login_cta') }}</button>
+      <p class="text-muted text-sm mt-4 text-center">
         {{ t('auth.no_account') }}
         <NuxtLink to="/auth/register">{{ t('auth.register') }}</NuxtLink>
       </p>
-    </form>
+   </form>
   </div>
 </template>

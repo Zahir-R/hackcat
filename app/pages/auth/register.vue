@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { t } = useI18n()
-const { register, user } = useAuth()
-const { birthDate, setBirthDate, ageMode } = useAgeMode()
+const { register, isAdmin } = useAuth()
+const { birthDate, setBirthDate } = useAgeMode()
 
 const email = ref('')
 const password = ref('')
@@ -9,10 +9,14 @@ const displayName = ref('')
 const phone = ref('')
 const isProfessional = ref(false)
 const error = ref('')
+const submitting = ref(false)
 
-function submit() {
+async function submit() {
+  if (submitting.value) return
+  submitting.value = true
+  error.value = ''
   try {
-    register({
+    const me = await register({
       email: email.value,
       password: password.value,
       displayName: displayName.value,
@@ -20,13 +24,16 @@ function submit() {
       phone: phone.value,
       isProfessional: isProfessional.value,
     })
-    if (ageMode.value === 'CHILD') navigateTo('/auth/guardian')
-    else if (isProfessional.value) navigateTo('/perfil/profesional')
-    else navigateTo('/perfil')
+    if (isAdmin.value) navigateTo('/admin')
+    else if (me.ageMode === 'CHILD') navigateTo('/auth/guardian')
+    else if (me.isProfessional) navigateTo('/perfil/profesional')
+    else navigateTo('/')
   } catch (e) {
     error.value = e instanceof Error && e.message === 'email_exists'
       ? t('auth.email_exists')
-      : String(e)
+      : t('auth.register_error')
+  } finally {
+    submitting.value = false
   }
 }
 </script>
@@ -61,9 +68,9 @@ function submit() {
       </label>
 
       <p v-if="error" class="field-error">{{ error }}</p>
-      <button class="btn btn-primary" type="submit">{{ t('auth.register_cta') }}</button>
+      <button class="btn btn-primary w-full mt-2" type="submit" :disabled="submitting">{{ t('auth.register_cta') }}</button>
 
-      <p class="text-muted text-sm mt-4">
+      <p class="text-muted text-sm mt-4 text-center">
         {{ t('auth.have_account') }}
         <NuxtLink to="/auth/login">{{ t('auth.login') }}</NuxtLink>
       </p>

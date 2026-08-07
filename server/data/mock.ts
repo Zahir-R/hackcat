@@ -1,4 +1,4 @@
-import type { Specialist, AvailabilitySlot, ForumTopic, Booking } from '../../app/types'
+import type { Specialist, ForumTopic } from '../../app/types'
 
 export interface I18nText { es: string; qu: string; gn: string; en: string }
 
@@ -335,38 +335,3 @@ export const forumTopics: ForumTopic[] = [
   },
 ]
 
-export function buildSlots(): AvailabilitySlot[] {
-  const slots: AvailabilitySlot[] = []
-  const pro = ['sp-1', 'sp-2', 'sp-3', 'sp-5', 'sp-8']
-  const now = Date.now()
-  const day = 86400000
-  pro.forEach((p, pi) => {
-    for (let d = 1; d <= 4; d++) {
-      for (const h of [9, 11, 15, 17]) {
-        const start = new Date(now + d * day)
-        start.setUTCHours(h, 0, 0, 0)
-        const end = new Date(start.getTime() + 60 * 60000)
-        slots.push({
-          id: `sl-${p}-${d}-${h}`,
-          professionalId: p,
-          startsAt: start.toISOString(),
-          endsAt: end.toISOString(),
-          modality: (pi + d + h) % 3 === 0 ? 'VIDEO' : (pi + d) % 2 === 0 ? 'VOICE' : 'VISIT',
-          isBooked: false,
-        })
-      }
-    }
-  })
-  return slots
-}
-
-let bookings: Booking[] = [
-  {
-    id: 'bk-1', clientId: 'demo', professionalId: 'sp-1', professionalName: 'Dra. Ana Condori',
-    slotId: 'sl-demo', startsAt: new Date(Date.now() + 2 * 86400000).toISOString(),
-    modality: 'VOICE', status: 'CONFIRMED', notes: 'Consulta sobre pensión alimenticia',
-  },
-]
-
-export function getBookings(): Booking[] { return bookings }
-export function addBooking(b: Booking) { bookings = [b, ...bookings] }

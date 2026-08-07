@@ -2,6 +2,8 @@
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import type { Specialist } from '~/types'
+import { icon as faIcon } from '@fortawesome/fontawesome-svg-core'
+import { faScaleBalanced } from '@fortawesome/free-solid-svg-icons'
 
 const props = defineProps<{
   specialists: Specialist[]
@@ -17,7 +19,7 @@ let icon: L.DivIcon
 if (typeof window !== 'undefined') {
   icon = L.divIcon({
     className: 'sp-marker',
-    html: '<div class="sp-marker-dot">⚖️</div>',
+    html: `<div class="sp-marker-dot">${faIcon(faScaleBalanced).html[0]}</div>`,
     iconSize: [36, 36],
     iconAnchor: [18, 36],
   })
@@ -40,7 +42,6 @@ function renderMarkers() {
   markers.value.forEach(m => m.remove())
   const arr = props.specialists.map((s) => {
     const m = L.marker([s.lat, s.lng], { icon }).addTo(map.value!)
-    m.bindPopup(`<strong>${s.name}</strong><br/>${s.headline}<br/><a href="/especialistas/${s.id}">Ver perfil →</a>`)
     m.on('click', () => emit('select', s.id))
     return m
   })
@@ -67,5 +68,8 @@ onBeforeUnmount(() => { map.value?.remove() })
   background: var(--color-primary); color: #fff;
   display: flex; align-items: center; justify-content: center;
   border: 2px solid #fff; box-shadow: var(--shadow-card); font-size: 1rem;
+}
+.sp-marker-dot svg {
+  width: 1.1rem; height: 1.1rem;
 }
 </style>

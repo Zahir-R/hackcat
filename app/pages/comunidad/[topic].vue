@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
+
 const { t } = useI18n()
 const route = useRoute()
 const id = route.params.id as string
@@ -28,7 +30,7 @@ function fmt(s: string) {
 
 <template>
   <div v-if="topic">
-    <NuxtLink to="/comunidad" class="text-muted text-sm">← {{ t('comunidad.back') }}</NuxtLink>
+    <NuxtLink to="/comunidad" class="text-muted text-sm inline-flex items-center gap-1.5"><FontAwesomeIcon :icon="faArrowLeft" /> {{ t('comunidad.back') }}</NuxtLink>
     <div class="card">
       <h1 class="mt-2">
         {{ topic.title }}

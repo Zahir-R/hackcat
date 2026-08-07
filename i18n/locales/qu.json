@@ -10,12 +10,29 @@
     "emergencias": "Urgentekuna",
     "admin": "Administración",
     "perfil": "Perfil",
+    "agenda": "Agenday",
     "ingresar": "Yaykuy",
     "salir": "Lluqsiy"
   },
   "home": {
     "hero": "Yanapaqkuna qayllaykipi",
-    "sub": "Rikapusqa yanapaqkunata maskhay, citata reservay, yanapayta chaskiy.",
+    "sub": "Normalizerqa runakunata rikapusqa abogados, psicólogos hinaspa trabajador social yanapaqkunawan tinkuchin. Maskhay, citata reservay, claroyachayta chaskiy.",
+    "cta_specialists": "Yanapaqkunata maskhay",
+    "cta_map": "Mapata qhaway",
+    "how_title": "Imaynatam llank'an",
+    "how_1_title": "Wataykita akllay",
+    "how_1_desc": "Modoyki kikinmanta hunukun: wawakuna, hatun runakuna icha machu runakunapaq ruwasqa contenido hinaspa interfaz.",
+    "how_2_title": "Maskhay hinaspa ch'illay",
+    "how_2_desc": "Yanapaq ñiqinta, especialidadta, simita hinaspa yachayta maskhay, mapapi icha listapi.",
+    "how_3_title": "Reservay hinaspa rimay",
+    "how_3_desc": "Visita, llamada icha videollamada reservay, icha Ramonmanta, kutichiy yanapaqniykimanta, tapukuy.",
+    "explore_title": "Plataformata qhaway",
+    "ql_especialistas": "Rikapusqa abogados, psicólogos, trabajador social, traductores hinaspa paralegales.",
+    "ql_mapa": "Rikuchisqa yanapaqkunata taripay, simi, especialidad hinaspa karu kayman hina ch'illay.",
+    "ql_comunidad": "Experiencias yachachikuy, temas ñawinchay hinaspa foropi yanapayta taripay.",
+    "ql_emergencias": "Policía, Bomberos hinaspa médico emergenciasman kikinman, hinallataq local yanapaykunaman.",
+    "modes_title": "Modokuna",
+    "modes_hint": "Aplicaciónqa wataykiman hina hunukun: sapa modo qhawachin allin contenido hinaspa interfazta.",
     "choose_mode": "Modoykita akllay",
     "modes": {
       "CHILD": {
@@ -31,6 +48,15 @@
         "desc": "65–100 watakuna"
       }
     },
+    "about_title": "Imam Normalizer?",
+    "about_body": "Normalizer nisqaqa justicia yaykuy plataforma, abogados, psicólogos, trabajador social, traductores hinaspa paralegales huk llapanpi huñusqa. Llapan perfiles administrador rikaykuspam rikuchikun, hinaspa sapa cita mana iskay reserva kanchu.",
+    "trust_title": "Pimanña conffiakuy",
+    "trust_verified": "Rikapusqa yanapaqkuna",
+    "trust_verified_desc": "Sapa perfil administración rikaykuchkan rikuchikunanpaq.",
+    "trust_ramon": "Ramon, yanapaqniyki",
+    "trust_ramon_desc": "Tapukuyniykikunata al instante kutichin, clarokunawan, hinaspa tupaq willakuykunaman pushasunki.",
+    "trust_support": "Yanapay hinaspa emergencias",
+    "trust_support_desc": "Emergencia ñiqinkuna hinaspa local yanapaykuna huk t'awinallapi.",
     "quick_links": "Usqhay ruraykuna"
   },
   "modo": {
@@ -102,6 +128,7 @@
     "register_cta": "Registrakuy",
     "login_cta": "Yaykuy",
     "login_error": "Correo utaq contraseña pantasqa.",
+    "register_error": "Manam cuenta rurayta atirqanichu. Musuqmanta ñawpaqman.",
     "no_account": "¿Cuenta mana kaptiyki?",
     "have_account": "¿Cuenta kaptiyki?",
     "guardian_title": "Wawa registru (8–12)",
@@ -119,6 +146,7 @@
     "pro_status": "Mañakuy qhawasqan",
     "resubmit": "Mañakuyta musuqmanta kachay",
     "bookings": "Reservasniy",
+    "cancel": "Amullay",
     "status": {
       "PENDING": "Qhawakuchkan",
       "APPROVED": "Chaskisqa",
@@ -136,7 +164,14 @@
     "languages": "Rimasqayki simikuna",
     "cv": "Currículum (PDF)",
     "submit": "Mañakuyta kachay",
-    "pending_hint": "Administrador chaskiqtinmi perfilyki rikurinqa."
+    "pending_hint": "Administrador chaskiqtinmi perfilyki rikurinqa.",
+    "error_roles": "Chaqa huk rolta utaq simita akllay.",
+    "location": "Kaypi kaq (mana obligatoriochu)",
+    "location_hint": "Mapapi ñit'iy kayniykita churanaykipaq. Mana akllaqtinqa, llaqtaykiwanmi churasqa kanqa.",
+    "edit_location": "Kayniykita hukchay",
+    "save_location": "Kayniykita waqaychay",
+    "location_saved": "Kayniyki hukchasqaña",
+    "cancel": "Amullay"
   },
   "admin": {
     "title": "Administración panel",
@@ -145,7 +180,36 @@
     "reject": "Manachaskiy",
     "reason": "Manachaskiy raykun",
     "faq": "FAQ kamachiy",
-    "empty": "Manam kanchu mañakuykuna."
+    "empty": "Manam kanchu mañakuykuna.",
+    "users": "Riqsisqa yaykuqkuna",
+    "no_users": "Manam kanchu yaykuqkuna.",
+    "delete_user": "Qulluy",
+    "delete_confirm": "¿{email} cuenta qulluyta munanki? Mañakuynin, perfilnin chaymanta reservakunan qullusqa kanqaku.",
+    "is_pro": "Profesional"
+  },
+  "agenda": {
+    "title": "Agenday",
+    "not_logged": "Agendaykita kamachinaykipaq yaykunayki tiyan.",
+    "not_approved": "Perfil profesionalniyki manaraq chaskisqachu.",
+    "not_approved_hint": "Agendaykita kamachinaykipaq chaskisqa perfilta necesitanki.",
+    "new_slot": "Musuq franja",
+    "date": "P'unchaw",
+    "time": "Ura",
+    "duration": "Haykuy pacha",
+    "modality": "Modalidad",
+    "create": "Franjata kachay",
+    "error_fields": "P'unchawta utaq urata akllay.",
+    "error_future": "Franjaqa qhipaman kanan tiyan.",
+    "incoming": "Hamun reservas",
+    "no_bookings": "Manam kanchu reservas.",
+    "confirm": "Sut'ichay",
+    "reject": "Manachaskiy",
+    "complete": "Tukuchiy",
+    "my_slots": "Franjasniy",
+    "no_slots": "Manaraq franjasniyki kanchu.",
+    "booked": "Reservasqa",
+    "delete": "Pichay",
+    "history": "Historial"
   },
   "reservar": {
     "title": "Reservay",
@@ -155,7 +219,8 @@
     "confirm": "Reservata sut'ichay",
     "no_slots": "Manam kanchu franjas.",
     "success": "Reserva mañakusqa. Confirmaqta chaskinki.",
-    "detail": "Reserva detalle"
+    "detail": "Reserva detalle",
+    "contact_hint": "Contactu kananta reserva confirmasqapi sut'ichay."
   },
   "ramon": {
     "name": "Ramon",

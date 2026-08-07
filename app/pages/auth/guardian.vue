@@ -8,8 +8,8 @@ const relationship = ref('tutor_legal')
 function submit() {
   if (!consent.value) return
   window.localStorage.setItem('jc_guardian', 'APPROVED')
-  update({})
-  navigateTo('/perfil')
+  void update({})
+  navigateTo('/')
 }
 </script>
 

@@ -10,12 +10,29 @@
     "emergencias": "Emergencia",
     "admin": "Administración",
     "perfil": "Perfil",
+    "agenda": "Che agenda",
     "ingresar": "Ñepyrũ",
     "salir": "Sẽ"
   },
   "home": {
     "hero": "Tepytyvõrã oĩva ne rendápe",
-    "sub": "Eheka mba'eporãhára, emboaje cita ha emombe'u ne añetegua.",
+    "sub": "Normalizer ombojoaju tavayguakuéra ojeporavopyre abogado, psicólogo ha trabajador social reheve. Eheka, emboaje cita ha ejapyru marandu hesakãva.",
+    "cta_specialists": "Eheka mba'eporãhára",
+    "cta_map": "Ehecha mapa",
+    "how_title": "Mba'éichapa oñemba'apo",
+    "how_1_title": "Eiporavo nde ary",
+    "how_1_desc": "Ne mode oñemoĩ automáticamente: contenido ha interfaz oĩporãva mitã, ava guasu térã itujaváva peguarã.",
+    "how_2_title": "Eheka ha eiporavo",
+    "how_2_desc": "Eheka mba'eichagua profesional, especialidad, ñe'ẽ ha experiencia rupi, mapa térã lista-pe.",
+    "how_3_title": "Emboaje ha ñe'ẽ",
+    "how_3_desc": "Emboaje visita, llamada térã videollamada, térã eporandu Ramon-pe, ne pytyvõhára ombohováiva.",
+    "explore_title": "Ehecha plataforma",
+    "ql_especialistas": "Abogado, psicólogo, trabajador social, traductor ha paralegal ojehechajepyréva.",
+    "ql_mapa": "Ejuhu profesionales hekopete oĩva ha embojue'e ñe'ẽ, especialidad ha mombyry rupi.",
+    "ql_comunidad": "Eñe'ẽ experiencia rehe, emoñe'ẽ tema ha ejuhu pytyvõ foro-pe.",
+    "ql_emergencias": "Policía, Bomberos ha emergencia médica-pe oñehenói jeparei, avei servicio local pytyvõrã.",
+    "modes_title": "Modo ojeporúva",
+    "modes_hint": "Aplicación oñemoĩ nde ary rupi: peteĩteĩ modo ohechauka contenido ha interfaz oĩporãva.",
     "choose_mode": "Eiporavo nde modo",
     "modes": {
       "CHILD": {
@@ -31,6 +48,15 @@
         "desc": "65–100 ary"
       }
     },
+    "about_title": "Mba'épa Normalizer?",
+    "about_body": "Normalizer ha'e peteĩ plataforma de acceso a la justicia omoĩ jo'a abogados, psicólogos, trabajador social, traductores ha paralegales. Opavave perfil ojehechajeykekuaa administrador-pe aprova mboyve, ha cita ndaikatúi doble reserva.",
+    "trust_title": "Máva piko ikatu rejerovia",
+    "trust_verified": "Profesionales ojehechajepyréva",
+    "trust_verified_desc": "Opaite perfil ojehechajey administración-pe ojejapara mboyve.",
+    "trust_ramon": "Ramon, ne pytyvõhára",
+    "trust_ramon_desc": "Ombohovái nde porandu oikuaave jepe, ipotĩ, ha omoĩ nepo contenido oñondiveguávape.",
+    "trust_support": "Pytyvõ ha emergencias",
+    "trust_support_desc": "Emergencia número ha servicio local pytyvõrã peteĩ pojoapy mante.",
     "quick_links": "Aguijereko"
   },
   "modo": {
@@ -102,6 +128,7 @@
     "register_cta": "Rejapota",
     "login_cta": "Ñepyrũ",
     "login_error": "Correo térã contraseña naiporãi.",
+    "register_error": "Ndoikatuí omoñepyrũ cuenta. Eha'ã jey.",
     "no_account": "¿Nda rekuái cuenta?",
     "have_account": "¿Reguereko cuenta?",
     "guardian_title": "Registro mitã (8–12)",
@@ -119,6 +146,7 @@
     "pro_status": "Estado",
     "resubmit": "Embojevy",
     "bookings": "Che reserva",
+    "cancel": "Embogue",
     "status": {
       "PENDING": "Ohóva",
       "APPROVED": "Oñemoneĩ",
@@ -136,7 +164,14 @@
     "languages": "Ñe'ẽ oñe'ẽva nde",
     "cv": "Currículum (PDF)",
     "submit": "Emondo",
-    "pending_hint": "Administrador omoneĩ jave ojekuaáta."
+    "pending_hint": "Administrador omoneĩ jave ojekuaáta.",
+    "error_roles": "Eiporavo peteĩ rol ha peteĩ ñe'ẽ.",
+    "location": "Tenda (opcional)",
+    "location_hint": "Eikutu mapape eñemboheko hag̃ua nde tenda. Nderemboheko'irõ, ojeiporúta ne táva.",
+    "edit_location": "Eñemboheko tenda",
+    "save_location": "Eñongatu tenda",
+    "location_saved": "Tenda oñembohekopa",
+    "cancel": "Mboty"
   },
   "admin": {
     "title": "Administración",
@@ -145,7 +180,36 @@
     "reject": "Mboty",
     "reason": "Mba'eicha",
     "faq": "FAQ",
-    "empty": "Ndaipóri solicitud."
+    "empty": "Ndaipóri solicitud.",
+    "users": "Usuaria oñemboajepyre",
+    "no_users": "Ndaipóri usuaria.",
+    "delete_user": "Mbogue",
+    "delete_confirm": "¿Embogue {email} cuenta? Ojepe'a ñemboaje, perfil ha reserva.",
+    "is_pro": "Profesional"
+  },
+  "agenda": {
+    "title": "Che agenda",
+    "not_logged": "Neñemboajéramo reñangareko hag̃ua ne agenda.",
+    "not_approved": "Ne perfil profesional ndahechajey'i gueteri.",
+    "not_approved_hint": "Reikotevẽ peteĩ perfil oñemoneĩva reñangareko hag̃ua ne agenda.",
+    "new_slot": "Franja pyahu",
+    "date": "Ára",
+    "time": "Aravo",
+    "duration": "Pukukue",
+    "modality": "Modalidad",
+    "create": "Emoherakuã franja",
+    "error_fields": "Eiporavo ára ha aravo.",
+    "error_future": "La franja oñeikotevẽva'ekue tenonde gotyo.",
+    "incoming": "Reservas ouva",
+    "no_bookings": "Ndaipóri reservas.",
+    "confirm": "Moañete",
+    "reject": "Mboty",
+    "complete": "Mboapyra",
+    "my_slots": "Che franjas",
+    "no_slots": "Ndaipóri ne franja.",
+    "booked": "Reservada",
+    "delete": "Mbogue",
+    "history": "Historial"
   },
   "reservar": {
     "title": "Emboaje",
@@ -155,7 +219,8 @@
     "confirm": "Emboaje",
     "no_slots": "Ndaipóri ára.",
     "success": "Reserva ojapota. Confirmación reme'ẽta.",
-    "detail": "Detalle"
+    "detail": "Detalle",
+    "contact_hint": "Ñe'ẽrã oñemboja'óta reserva confirmada-pe."
   },
   "ramon": {
     "name": "Ramon",

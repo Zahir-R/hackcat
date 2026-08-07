@@ -10,12 +10,29 @@
     "emergencias": "Emergencies",
     "admin": "Administration",
     "perfil": "Profile",
+    "agenda": "My schedule",
     "ingresar": "Sign in",
     "salir": "Sign out"
   },
   "home": {
     "hero": "Legal and psychosocial support near you",
-    "sub": "Find verified professionals, book appointments and get guidance.",
+    "sub": "Normalizer connects people with verified legal, psychology and social-work professionals. Find someone to help you, book an appointment and get clear guidance.",
+    "cta_specialists": "Find specialists",
+    "cta_map": "View the map",
+    "how_title": "How it works",
+    "how_1_title": "Choose your age",
+    "how_1_desc": "Your mode adapts automatically: content and interface tailored for children, adults or older people.",
+    "how_2_title": "Explore and filter",
+    "how_2_desc": "Search by type of professional, specialty, language and experience, on the map or in the list.",
+    "how_3_title": "Book and chat",
+    "how_3_desc": "Schedule a visit, call or video call, or ask Ramon, your answers assistant.",
+    "explore_title": "Explore the platform",
+    "ql_especialistas": "Verified lawyers, psychologists, social workers, translators and paralegals.",
+    "ql_mapa": "Find geolocated professionals and filter by language, specialty and distance.",
+    "ql_comunidad": "Share experiences, read topics and find support in the forum.",
+    "ql_emergencias": "Direct access to Police, Firefighters and medical emergencies, plus local support services.",
+    "modes_title": "Usage modes",
+    "modes_hint": "The app adapts to your age: each mode shows appropriate content and interface.",
     "choose_mode": "Choose your mode",
     "modes": {
       "CHILD": {
@@ -31,6 +48,15 @@
         "desc": "65–100 years"
       }
     },
+    "about_title": "What is Normalizer?",
+    "about_body": "Normalizer is a legal-access platform that brings together lawyers, psychologists, social workers, translators and paralegals in one place. All profiles are reviewed and approved by an administrator before going public, and every appointment is scheduled without double-booking.",
+    "trust_title": "Who you can trust",
+    "trust_verified": "Verified professionals",
+    "trust_verified_desc": "Every profile is reviewed and approved by administration before being published.",
+    "trust_ramon": "Ramon, your assistant",
+    "trust_ramon_desc": "Answers your questions instantly with clear responses and links you to related content.",
+    "trust_support": "Support and emergencies",
+    "trust_support_desc": "Emergency numbers and local support services always one tap away.",
     "quick_links": "Quick links"
   },
   "modo": {
@@ -102,6 +128,7 @@
     "register_cta": "Register",
     "login_cta": "Sign in",
     "login_error": "Incorrect email or password.",
+    "register_error": "Could not create the account. Try again.",
     "no_account": "No account?",
     "have_account": "Already have an account?",
     "guardian_title": "Registering a child (8–12)",
@@ -119,6 +146,7 @@
     "pro_status": "Application status",
     "resubmit": "Resubmit application",
     "bookings": "My bookings",
+    "cancel": "Cancel",
     "status": {
       "PENDING": "Pending review",
       "APPROVED": "Approved",
@@ -136,7 +164,14 @@
     "languages": "Languages you speak",
     "cv": "Resume (PDF)",
     "submit": "Submit application",
-    "pending_hint": "Your profile becomes visible once an admin approves it."
+    "pending_hint": "Your profile becomes visible once an admin approves it.",
+    "error_roles": "Select at least one role and one language.",
+    "location": "Location (optional)",
+    "location_hint": "Click the map to set your point. If you don't, your city will be used.",
+    "edit_location": "Edit location",
+    "save_location": "Save location",
+    "location_saved": "Location updated",
+    "cancel": "Cancel"
   },
   "admin": {
     "title": "Admin panel",
@@ -145,7 +180,36 @@
     "reject": "Reject",
     "reason": "Rejection reason",
     "faq": "FAQ management",
-    "empty": "No pending applications."
+    "empty": "No pending applications.",
+    "users": "Registered users",
+    "no_users": "No registered users.",
+    "delete_user": "Delete",
+    "delete_confirm": "Delete the account of {email}? Their application, profile and bookings will be removed.",
+    "is_pro": "Professional"
+  },
+  "agenda": {
+    "title": "My schedule",
+    "not_logged": "Log in to manage your schedule.",
+    "not_approved": "Your professional profile is not approved yet.",
+    "not_approved_hint": "You need an approved profile to manage your schedule.",
+    "new_slot": "New slot",
+    "date": "Date",
+    "time": "Time",
+    "duration": "Duration",
+    "modality": "Modality",
+    "create": "Publish slot",
+    "error_fields": "Pick a date and time.",
+    "error_future": "The slot must be in the future.",
+    "incoming": "Incoming bookings",
+    "no_bookings": "No bookings to review.",
+    "confirm": "Confirm",
+    "reject": "Reject",
+    "complete": "Complete",
+    "my_slots": "My slots",
+    "no_slots": "No slots published yet.",
+    "booked": "Booked",
+    "delete": "Delete",
+    "history": "History"
   },
   "reservar": {
     "title": "Book with",
@@ -155,7 +219,8 @@
     "confirm": "Confirm booking",
     "no_slots": "No available slots.",
     "success": "Booking requested. You will receive a confirmation.",
-    "detail": "Booking detail"
+    "detail": "Booking detail",
+    "contact_hint": "The contact method is shared on the confirmed booking."
   },
   "ramon": {
     "name": "Ramon",

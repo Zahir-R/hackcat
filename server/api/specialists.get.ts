@@ -1,4 +1,4 @@
-import { specialists } from '../data/mock'
+import { state } from '../data/state'
 import { haversineKm } from '../utils/geo'
 
 export default defineEventHandler((event) => {
@@ -13,7 +13,7 @@ export default defineEventHandler((event) => {
   const languages = asArray(q.idioma)
   const minExp = Number(q.minExp ?? 0) || 0
 
-  const filtered = specialists
+  const filtered = state.specialists
     .filter(s => s.status === 'APPROVED')
     .filter(s => roles.length === 0 || s.roles.some(r => roles.includes(r)))
     .filter(s => specialties.length === 0 || s.specialties.some(x => specialties.includes(x)))

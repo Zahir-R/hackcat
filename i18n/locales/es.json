@@ -10,12 +10,29 @@
     "emergencias": "Emergencias",
     "admin": "Administración",
     "perfil": "Perfil",
+    "agenda": "Mi agenda",
     "ingresar": "Ingresar",
     "salir": "Salir"
   },
   "home": {
     "hero": "Apoyo legal y psicosocial cerca de ti",
-    "sub": "Encuentra profesionales verificados, reserva citas y recibe orientación. Así funciona: elige tu edad, explora, reserva.",
+    "sub": "Normalizer conecta a la ciudadanía con profesionales verificados de abogacía, psicología y trabajo social. Encuentra a quien te ayude, reserva una cita y recibe orientación clara.",
+    "cta_specialists": "Buscar especialistas",
+    "cta_map": "Ver el mapa",
+    "how_title": "Cómo funciona",
+    "how_1_title": "Elige tu edad",
+    "how_1_desc": "Tu modo se adapta solo: contenido e interfaz pensados para niños, adultos o personas mayores.",
+    "how_2_title": "Explora y filtra",
+    "how_2_desc": "Busca por tipo de profesional, especialidad, idioma y experiencia, en el mapa o en la lista.",
+    "how_3_title": "Reserva y conversa",
+    "how_3_desc": "Agenda una visita, llamada o videollamada, o consulta a Ramon, tu asistente de respuestas.",
+    "explore_title": "Explora la plataforma",
+    "ql_especialistas": "Abogados/as, psicólogos/as, trabajadores/as sociales, traductores/as y paralegales verificados.",
+    "ql_mapa": "Encuentra profesionales geolocalizados y filtra por idioma, especialidad y distancia.",
+    "ql_comunidad": "Comparte experiencias, lee temas y encuentra respaldo en el foro.",
+    "ql_emergencias": "Acceso directo a Policía, Bomberos y emergencias médicas, y a servicios locales de apoyo.",
+    "modes_title": "Modos de uso",
+    "modes_hint": "La aplicación se adapta según tu edad: cada modo muestra contenido e interfaz adecuados.",
     "choose_mode": "Elige tu modo",
     "modes": {
       "CHILD": {
@@ -31,6 +48,15 @@
         "desc": "65–100 años"
       }
     },
+    "about_title": "¿Qué es Normalizer?",
+    "about_body": "Normalizer es una plataforma de acceso a la justicia que reúne en un solo lugar abogados/as, psicólogos/as, trabajadores/as sociales, traductores/as y paralegales. Todos los perfiles son revisados y aprobados por un administrador antes de publicarse, y cada cita se agenda sin dobles reservas.",
+    "trust_title": "En quién puedes confiar",
+    "trust_verified": "Profesionales verificados",
+    "trust_verified_desc": "Cada perfil es revisado y aprobado por administración antes de publicarse.",
+    "trust_ramon": "Ramon, tu asistente",
+    "trust_ramon_desc": "Responde tus dudas al instante con respuestas claras y te enlaza al contenido relacionado.",
+    "trust_support": "Apoyo y emergencias",
+    "trust_support_desc": "Números de emergencia y servicios locales de apoyo siempre a un toque.",
     "quick_links": "Accesos rápidos"
   },
   "modo": {
@@ -102,6 +128,7 @@
     "register_cta": "Registrarse",
     "login_cta": "Ingresar",
     "login_error": "Correo o contraseña incorrectos.",
+    "register_error": "No se pudo crear la cuenta. Intenta de nuevo.",
     "no_account": "¿No tienes cuenta?",
     "have_account": "¿Ya tienes cuenta?",
     "guardian_title": "Registro de un niño o niña (8–12)",
@@ -119,6 +146,7 @@
     "pro_status": "Estado de la solicitud",
     "resubmit": "Reenviar solicitud",
     "bookings": "Mis reservas",
+    "cancel": "Cancelar",
     "status": {
       "PENDING": "Pendiente de revisión",
       "APPROVED": "Aprobado",
@@ -136,7 +164,14 @@
     "languages": "Idiomas que hablas",
     "cv": "Currículum (PDF)",
     "submit": "Enviar solicitud",
-    "pending_hint": "Tu perfil será visible cuando un administrador lo apruebe."
+    "pending_hint": "Tu perfil será visible cuando un administrador lo apruebe.",
+    "error_roles": "Selecciona al menos un rol y un idioma.",
+    "location": "Ubicación (opcional)",
+    "location_hint": "Haz clic en el mapa para fijar tu punto. Si no lo eliges, se usará tu ciudad.",
+    "edit_location": "Editar ubicación",
+    "save_location": "Guardar ubicación",
+    "location_saved": "Ubicación actualizada",
+    "cancel": "Cancelar"
   },
   "admin": {
     "title": "Panel de administración",
@@ -145,7 +180,36 @@
     "reject": "Rechazar",
     "reason": "Motivo del rechazo",
     "faq": "Gestión de FAQ",
-    "empty": "No hay solicitudes pendientes."
+    "empty": "No hay solicitudes pendientes.",
+    "users": "Usuarios registrados",
+    "no_users": "No hay usuarios registrados.",
+    "delete_user": "Eliminar",
+    "delete_confirm": "¿Eliminar la cuenta de {email}? Se borrarán su solicitud, perfil y reservas.",
+    "is_pro": "Profesional"
+  },
+  "agenda": {
+    "title": "Mi agenda",
+    "not_logged": "Debes ingresar para gestionar tu agenda.",
+    "not_approved": "Tu perfil profesional aún no está aprobado.",
+    "not_approved_hint": "Necesitas un perfil aprobado para gestionar tu agenda.",
+    "new_slot": "Nueva franja",
+    "date": "Fecha",
+    "time": "Hora",
+    "duration": "Duración",
+    "modality": "Modalidad",
+    "create": "Publicar franja",
+    "error_fields": "Selecciona fecha y hora.",
+    "error_future": "La franja debe estar en el futuro.",
+    "incoming": "Reservas entrantes",
+    "no_bookings": "No hay reservas por confirmar.",
+    "confirm": "Confirmar",
+    "reject": "Rechazar",
+    "complete": "Completar",
+    "my_slots": "Mis franjas",
+    "no_slots": "Aún no tienes franjas publicadas.",
+    "booked": "Reservada",
+    "delete": "Eliminar",
+    "history": "Historial"
   },
   "reservar": {
     "title": "Reservar con",
@@ -155,7 +219,8 @@
     "confirm": "Confirmar reserva",
     "no_slots": "No hay franjas disponibles.",
     "success": "Reserva solicitada. Recibirás una confirmación.",
-    "detail": "Detalle de la reserva"
+    "detail": "Detalle de la reserva",
+    "contact_hint": "El medio de contacto se comparte en la reserva confirmada."
   },
   "ramon": {
     "name": "Ramon",

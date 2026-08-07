@@ -16,7 +16,7 @@ const center = computed(() => coords.value ?? fallback)
   <div>
     <div class="flex justify-between items-center gap-3 flex-wrap">
       <h1>{{ t('mapa.title') }}</h1>
-      <button class="btn" @click="locate().then(fetchSpecialists)">{{ t('mapa.refresh') }}</button>
+      <button class="btn mb-2" @click="locate().then(fetchSpecialists)">{{ t('mapa.refresh') }}</button>
     </div>
     <p v-if="permissionDenied" class="text-muted text-sm">{{ t('especialistas.no_geo', { city: 'Sucre' }) }}</p>
     <ClientOnly>

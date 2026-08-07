@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { t } = useI18n()
-const { user, isLoggedIn, isProfessional, myApplication, update, logout } = useAuth()
-const { myBookings } = useBookings()
+const { user, isLoggedIn, isProfessional, myApplication, update, logout, restore } = useAuth()
+const { myBookings, fetchMyBookings, cancelBooking } = useBookings()
 
 const editing = ref(false)
 const form = reactive({
@@ -18,17 +18,26 @@ watch(user, () => {
   }
 }, { immediate: true })
 
-onMounted(() => {
-  if (!isLoggedIn.value) navigateTo('/auth/login')
+onMounted(async () => {
+  await restore()
+  if (!isLoggedIn.value) {
+    navigateTo('/auth/login')
+    return
+  }
+  await fetchMyBookings()
 })
 
-function save() {
-  update({
+async function save() {
+  await update({
     displayName: form.displayName,
     phone: form.phone,
     birthDate: form.birthDate,
   })
   editing.value = false
+}
+
+async function cancel(bookingId: string) {
+  await cancelBooking(bookingId)
 }
 
 function fmt(s: string) {
@@ -77,6 +86,9 @@ function fmt(s: string) {
         </span>
         <span v-if="myApplication.rejectionReason" class="text-muted text-sm"> — {{ myApplication.rejectionReason }}</span>
       </p>
+      <p v-if="myApplication?.status === 'APPROVED'" class="mt-4">
+        <NuxtLink to="/perfil/agenda" class="no-underline font-semibold text-primary-ink">{{ t('nav.agenda') }}</NuxtLink>
+      </p>
       <p v-if="myApplication?.status === 'REJECTED'" class="mt-4">
         <NuxtLink to="/perfil/profesional" class="no-underline font-semibold text-primary-ink">{{ t('perfil.resubmit') }}</NuxtLink>
       </p>
@@ -89,8 +101,16 @@ function fmt(s: string) {
         <div>
           <strong>{{ b.professionalName }}</strong>
           <div class="text-muted text-sm">{{ fmt(b.startsAt) }} · {{ t(`especialistas.${b.modality === 'VISIT' ? 'visit' : b.modality === 'VOICE' ? 'voice' : 'video'}`) }}</div>
+          <div v-if="b.status === 'CONFIRMED' && b.modality !== 'VISIT'" class="text-muted text-sm">{{ t('reservar.contact_hint') }}</div>
         </div>
-        <span class="badge" :class="b.status === 'CONFIRMED' ? 'ok' : b.status === 'CANCELLED' ? 'bad' : 'warn'">{{ b.status }}</span>
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="badge" :class="b.status === 'CONFIRMED' ? 'ok' : b.status === 'CANCELLED' ? 'bad' : 'warn'">{{ b.status }}</span>
+          <button
+            v-if="b.status === 'PENDING' || b.status === 'CONFIRMED'"
+            class="btn btn-danger text-sm"
+            @click="cancel(b.id)"
+          >{{ t('perfil.cancel') }}</button>
+        </div>
       </div>
     </div>
 

@@ -51,11 +51,41 @@ export interface Booking {
   clientId: string
   professionalId: string
   professionalName: string
+  clientName?: string
   slotId: string
   startsAt: string
   modality: 'VISIT' | 'VOICE' | 'VIDEO'
   status: 'PENDING' | 'CONFIRMED' | 'CANCELLED' | 'COMPLETED'
   notes: string
+}
+
+export interface StoredUser {
+  id: string
+  email: string
+  password: string
+  displayName: string
+  birthDate: string
+  ageMode: AgeMode
+  phone: string
+  language: LangCode
+  isProfessional: boolean
+}
+
+export interface ProfessionalApplication {
+  id: string
+  profileId: string
+  name: string
+  headline: string
+  bio: string
+  experienceYears: number
+  city: string
+  lat?: number
+  lng?: number
+  roles: string[]
+  specialties: string[]
+  languages: string[]
+  status: 'PENDING' | 'APPROVED' | 'REJECTED'
+  rejectionReason?: string
 }
 
 export type FaqTargetType = 'PAGE' | 'SPECIALISTS_FILTER' | 'FORUM_TOPIC' | 'PROFILE'

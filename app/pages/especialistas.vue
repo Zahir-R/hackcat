@@ -39,34 +39,33 @@ function reset() {
       </div>
       <div class="grid gap-2.5 grid-cols-[repeat(auto-fill,minmax(180px,1fr))]">
         <label>{{ t('especialistas.rol') }}
-          <select v-model="filters.rol" class="input bg-primary-dark text-white border-primary">
+          <select v-model="filters.rol" class="input">
             <option value="">—</option>
             <option v-for="r in roles" :key="r" :value="r">{{ roleLabel(r) }}</option>
           </select>
         </label>
         <label>{{ t('especialistas.especialidad') }}
-          <select v-model="filters.especialidad" class="input bg-primary-dark text-white border-primary">
+          <select v-model="filters.especialidad" class="input">
             <option value="">—</option>
             <option v-for="s in specialties" :key="s" :value="s">{{ specialtyLabel(s) }}</option>
           </select>
         </label>
         <label>{{ t('especialistas.idioma') }}
-          <select v-model="filters.idioma" class="input bg-primary-dark text-white border-primary">
+          <select v-model="filters.idioma" class="input">
             <option value="">—</option>
             <option v-for="l in languages" :key="l" :value="l">{{ languageLabel(l) }}</option>
           </select>
         </label>
         <label>{{ t('especialistas.minExp') }}
-          <input v-model.number="filters.minExp" type="number" min="0" max="40" class="input bg-primary-dark text-white border-primary" />
+          <input v-model.number="filters.minExp" type="number" min="0" max="40" class="input" />
         </label>
         <label>{{ t('especialistas.radius') }}
-          <input v-model.number="filters.radius" type="number" min="1" max="300" class="input bg-primary-dark text-white border-primary" />
+          <input v-model.number="filters.radius" type="number" min="1" max="300" class="input" />
         </label>
       </div>
       <div class="flex gap-3 items-center flex-wrap mt-4">
         <button class="btn btn-primary" @click="apply">{{ t('especialistas.apply') }}</button>
         <button class="btn" @click="reset">{{ t('especialistas.reset') }}</button>
-        <button class="btn" @click="locate().then(apply)">{{ t('mapa.refresh') }}</button>
       </div>
     </div>
 

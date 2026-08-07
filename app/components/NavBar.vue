@@ -1,10 +1,14 @@
 <script setup lang="ts">
+import { faScaleBalanced } from '@fortawesome/free-solid-svg-icons'
+
 const { t } = useI18n()
-const { isLoggedIn, isAdmin, user, logout } = useAuth()
+const { isLoggedIn, isAdmin, user, myApplication, logout } = useAuth()
 const locale = useI18n()
 const route = useRoute()
 
 const mobileOpen = ref(false)
+
+const canManageAgenda = computed(() => myApplication.value?.status === 'APPROVED')
 
 function currentPath(path: string) {
   if (path === '/') return route.path === '/'
@@ -47,8 +51,8 @@ watch(() => route.fullPath, closeMenu)
 <template>
   <header class="sticky top-0 z-[600] bg-surface border-b border-border shadow-card">
     <div class="max-w-[1100px] mx-auto px-4 py-2 flex items-center gap-4">
-      <NuxtLink to="/" class="font-display font-extrabold text-primary-ink text-lg whitespace-nowrap no-underline" @click="closeMenu">
-        ⚖️ {{ t('app.name') }}
+      <NuxtLink to="/" class="font-display font-extrabold text-primary-ink text-lg whitespace-nowrap no-underline inline-flex items-center gap-2" @click="closeMenu">
+        <FontAwesomeIcon :icon="faScaleBalanced" /> {{ t('app.name') }}
       </NuxtLink>
 
       <nav class="hidden md:flex flex-1 gap-1 items-center">
@@ -56,7 +60,7 @@ watch(() => route.fullPath, closeMenu)
           v-for="l in links"
           :key="l.to"
           :to="l.to"
-          class="relative no-underline text-text font-semibold px-2.5 py-2 min-h-11 inline-flex items-center rounded-lg hover:bg-[#F0D3A8] hover:text-primary-ink after:absolute after:left-2.5 after:right-2.5 after:bottom-0.5 after:h-0.5 after:rounded after:bg-primary-ink after:scale-x-0 after:origin-left after:transition-transform after:duration-200"
+          class="relative no-underline text-text font-semibold px-2.5 py-2 min-h-11 inline-flex items-center rounded-lg hover:bg-accent-soft hover:text-primary-ink after:absolute after:left-2.5 after:right-2.5 after:bottom-0.5 after:h-0.5 after:rounded after:bg-primary-ink after:scale-x-0 after:origin-left after:transition-transform after:duration-200"
           :class="currentPath(l.to) ? 'text-primary-ink after:scale-x-100' : ''"
         >
           {{ l.label }}
@@ -65,7 +69,7 @@ watch(() => route.fullPath, closeMenu)
 
       <div class="hidden md:flex items-center gap-1">
         <select
-          class="min-h-9 h-9 w-auto px-2 max-w-36 bg-primary-dark text-white border border-primary rounded-lg"
+          class="min-h-9 h-9 w-auto px-2 max-w-36 bg-white text-text border border-border rounded-lg"
           aria-label="Idioma"
           :value="locale.locale.value"
           @change="e => setLocale((e.target as HTMLSelectElement).value)"
@@ -77,6 +81,9 @@ watch(() => route.fullPath, closeMenu)
           <NuxtLink to="/perfil" class="inline-flex items-center no-underline text-text font-semibold min-h-10 px-2 hover:text-primary-ink">
             {{ t('nav.perfil') }}
           </NuxtLink>
+          <NuxtLink v-if="canManageAgenda" to="/perfil/agenda" class="inline-flex items-center no-underline text-text font-semibold min-h-10 px-2 hover:text-primary-ink">
+            {{ t('nav.agenda') }}
+          </NuxtLink>
           <NuxtLink v-if="isAdmin" to="/admin" class="inline-flex items-center no-underline text-text font-semibold min-h-10 px-2 hover:text-primary-ink">
             {{ t('nav.admin') }}
           </NuxtLink>
@@ -85,7 +92,7 @@ watch(() => route.fullPath, closeMenu)
           </button>
         </template>
         <template v-else>
-          <NuxtLink to="/auth/login" class="inline-flex items-center bg-ingresar-bg text-[#5A2A1B] font-semibold rounded-lg px-3.5 py-2 min-h-10 no-underline hover:bg-[#F0D3A8]">
+          <NuxtLink to="/auth/login" class="inline-flex items-center bg-ingresar-bg text-text font-semibold rounded-lg px-3.5 py-2 min-h-10 no-underline hover:bg-accent-soft">
             {{ t('nav.ingresar') }}
           </NuxtLink>
         </template>
@@ -108,8 +115,8 @@ watch(() => route.fullPath, closeMenu)
         v-for="l in links"
         :key="l.to"
         :to="l.to"
-        class="no-underline text-text font-semibold py-3 px-2 rounded-lg hover:bg-[#F0D3A8]"
-        :class="currentPath(l.to) ? 'text-primary-ink bg-[#F0D3A8]' : ''"
+        class="no-underline text-text font-semibold py-3 px-2 rounded-lg hover:bg-accent-soft"
+        :class="currentPath(l.to) ? 'text-primary-ink bg-accent-soft' : ''"
         @click="closeMenu"
       >
         {{ l.label }}
@@ -118,7 +125,7 @@ watch(() => route.fullPath, closeMenu)
       <div class="h-px bg-border my-2" />
 
       <select
-        class="w-full min-h-11 bg-primary-dark text-white border border-primary rounded-lg px-2"
+        class="w-full min-h-11 bg-white text-text border border-border rounded-lg px-2"
         aria-label="Idioma"
         :value="locale.locale.value"
         @change="e => setLocale((e.target as HTMLSelectElement).value)"
@@ -129,21 +136,29 @@ watch(() => route.fullPath, closeMenu)
       <template v-if="isLoggedIn">
         <NuxtLink
           to="/perfil"
-          class="no-underline text-text font-semibold py-3 px-2 rounded-lg hover:bg-[#F0D3A8]"
+          class="no-underline text-text font-semibold py-3 px-2 rounded-lg hover:bg-accent-soft"
           @click="closeMenu"
         >
           {{ t('nav.perfil') }}
         </NuxtLink>
         <NuxtLink
+          v-if="canManageAgenda"
+          to="/perfil/agenda"
+          class="no-underline text-text font-semibold py-3 px-2 rounded-lg hover:bg-accent-soft"
+          @click="closeMenu"
+        >
+          {{ t('nav.agenda') }}
+        </NuxtLink>
+        <NuxtLink
           v-if="isAdmin"
           to="/admin"
-          class="no-underline text-text font-semibold py-3 px-2 rounded-lg hover:bg-[#F0D3A8]"
+          class="no-underline text-text font-semibold py-3 px-2 rounded-lg hover:bg-accent-soft"
           @click="closeMenu"
         >
           {{ t('nav.admin') }}
         </NuxtLink>
         <button
-          class="text-left bg-transparent border-none text-text font-semibold py-3 px-2 rounded-lg hover:bg-[#F0D3A8]"
+          class="text-left bg-transparent border-none text-text font-semibold py-3 px-2 rounded-lg hover:bg-accent-soft"
           @click="onLogout"
         >
           {{ t('nav.salir') }}
@@ -152,7 +167,7 @@ watch(() => route.fullPath, closeMenu)
       <template v-else>
         <NuxtLink
           to="/auth/login"
-          class="inline-flex items-center justify-center bg-ingresar-bg text-[#5A2A1B] font-semibold rounded-lg px-3.5 py-3 no-underline hover:bg-[#F0D3A8]"
+          class="inline-flex items-center justify-center bg-ingresar-bg text-text font-semibold rounded-lg px-3.5 py-3 no-underline hover:bg-accent-soft"
           @click="closeMenu"
         >
           {{ t('nav.ingresar') }}

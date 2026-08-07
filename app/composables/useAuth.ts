@@ -1,142 +1,160 @@
-import type { Profile } from '~/types'
+import type { Profile, ProfessionalApplication } from '~/types'
 
-interface StoredUser extends Profile {
-  email: string
-  password: string
-}
-
-interface ProfessionalApplication {
-  id: string
-  profileId: string
-  name: string
-  headline: string
-  bio: string
-  experienceYears: number
-  city: string
-  roles: string[]
-  specialties: string[]
-  languages: string[]
-  status: 'PENDING' | 'APPROVED' | 'REJECTED'
-  rejectionReason?: string
-}
-
-const USERS_KEY = 'jc_users'
+export const ADMIN_EMAIL = 'admin@justicia.bo'
 const SESSION_KEY = 'jc_session'
-const APPS_KEY = 'jc_applications'
-const ADMIN_EMAIL = 'admin@justicia.bo'
 
-function loadUsers(): StoredUser[] {
-  if (typeof window === 'undefined') return []
-  try { return JSON.parse(window.localStorage.getItem(USERS_KEY) || '[]') } catch { return [] }
-}
-function saveUsers(users: StoredUser[]) {
-  window.localStorage.setItem(USERS_KEY, JSON.stringify(users))
-}
-function loadApps(): ProfessionalApplication[] {
-  if (typeof window === 'undefined') return []
-  try { return JSON.parse(window.localStorage.getItem(APPS_KEY) || '[]') } catch { return [] }
-}
-function saveApps(apps: ProfessionalApplication[]) {
-  window.localStorage.setItem(APPS_KEY, JSON.stringify(apps))
-}
+let restorePromise: Promise<void> | null = null
 
-const toProfile = (u: StoredUser): Profile => ({
-  id: u.id,
-  email: u.email,
-  displayName: u.displayName,
-  birthDate: u.birthDate,
-  ageMode: u.ageMode,
-  phone: u.phone,
-  language: u.language,
-  isProfessional: u.isProfessional,
-})
+const toErrorMessage = (e: unknown) => {
+  if (e && typeof e === 'object' && 'status' in e) {
+    const status = (e as { status: number }).status
+    if (status === 409) return 'email_exists'
+    if (status === 401) return 'invalid_credentials'
+  }
+  return null
+}
 
 export const useAuth = () => {
   const user = useState<Profile | null>('jc:user', () => null)
   const isLoggedIn = computed(() => !!user.value)
   const isAdmin = computed(() => user.value?.id === ADMIN_EMAIL)
   const isProfessional = computed(() => !!user.value?.isProfessional)
+  const applications = useState<ProfessionalApplication[]>('jc:apps', () => [])
+  const users = useState<{ id: string; email: string; displayName: string; isProfessional: boolean }[]>('jc:users', () => [])
+  const loading = useState('jc:auth-loading', () => false)
 
-  function restore() {
+  function setSession(me: Profile) {
+    user.value = me
+    window.localStorage.setItem(SESSION_KEY, me.email ?? me.id)
+    useAgeMode().setBirthDate(me.birthDate)
+  }
+
+  function clearSession() {
+    window.localStorage.removeItem(SESSION_KEY)
+    user.value = null
+    applications.value = []
+  }
+
+  async function refreshApplications() {
+    if (!user.value) {
+      applications.value = []
+      return
+    }
+    applications.value = await $fetch<ProfessionalApplication[]>('/api/applications', {
+      query: { email: user.value.email },
+    })
+  }
+
+  async function restore() {
     if (typeof window === 'undefined') return
+    if (!restorePromise) {
+      restorePromise = doRestore().finally(() => { restorePromise = null })
+    }
+    return restorePromise
+  }
+
+  async function doRestore() {
     const email = window.localStorage.getItem(SESSION_KEY)
     if (!email) return
-    const u = loadUsers().find(x => x.email === email)
-    if (u) user.value = toProfile(u)
-  }
-
-  function register(data: { email: string; password: string; displayName: string; birthDate: string; phone?: string; isProfessional: boolean }) {
-    const users = loadUsers()
-    if (users.some(u => u.email === data.email)) throw new Error('email_exists')
-    const { ageMode } = useAgeMode()
-    const stored: StoredUser = {
-      id: data.email,
-      email: data.email,
-      password: data.password,
-      displayName: data.displayName,
-      birthDate: data.birthDate,
-      ageMode: deriveAgeMode(data.birthDate),
-      phone: data.phone ?? '',
-      language: 'es',
-      isProfessional: data.isProfessional,
+    try {
+      const me = await $fetch<Profile>('/api/auth/me', { query: { email } })
+      setSession(me)
+      await refreshApplications()
+    } catch {
+      clearSession()
     }
-    users.push(stored)
-    saveUsers(users)
-    window.localStorage.setItem(SESSION_KEY, stored.email)
-    user.value = toProfile(stored)
-    void ageMode
   }
 
-  function login(email: string, password: string) {
-    const u = loadUsers().find(x => x.email === email)
-    if (!u || u.password !== password) throw new Error('invalid_credentials')
-    window.localStorage.setItem(SESSION_KEY, u.email)
-    user.value = toProfile(u)
+  async function register(data: { email: string; password: string; displayName: string; birthDate: string; phone?: string; isProfessional: boolean }) {
+    try {
+      const me = await $fetch<Profile>('/api/auth/register', {
+        method: 'POST',
+        body: { ...data, email: data.email.trim().toLowerCase() },
+      })
+      setSession(me)
+      await refreshApplications()
+      return me
+    } catch (e) {
+      const msg = toErrorMessage(e)
+      if (msg) throw new Error(msg)
+      throw e
+    }
+  }
+
+  async function login(email: string, password: string) {
+    try {
+      const me = await $fetch<Profile>('/api/auth/login', {
+        method: 'POST',
+        body: { email: email.trim().toLowerCase(), password },
+      })
+      setSession(me)
+      await refreshApplications()
+      return me
+    } catch (e) {
+      const msg = toErrorMessage(e)
+      if (msg) throw new Error(msg)
+      throw e
+    }
   }
 
   function logout() {
-    window.localStorage.removeItem(SESSION_KEY)
-    user.value = null
+    clearSession()
   }
 
-  function update(partial: Partial<Profile>) {
+  async function update(partial: Partial<Profile>) {
     if (!user.value) return
-    const users = loadUsers()
-    const i = users.findIndex(u => u.id === user.value!.id)
-    if (i < 0) return
-    users[i] = { ...users[i], ...partial, birthDate: partial.birthDate ?? users[i].birthDate, ageMode: partial.birthDate ? deriveAgeMode(partial.birthDate) : users[i].ageMode }
-    saveUsers(users)
-    user.value = toProfile(users[i])
+    const me = await $fetch<Profile>('/api/profiles', {
+      method: 'PATCH',
+      body: { email: user.value.email, ...partial },
+    })
+    setSession(me)
   }
 
-  const applications = useState<ProfessionalApplication[]>('jc:apps', () => loadApps())
-
-  function applyProfessional(app: Omit<ProfessionalApplication, 'id' | 'profileId' | 'status'>) {
+  async function applyProfessional(app: Omit<ProfessionalApplication, 'id' | 'profileId' | 'name' | 'status'>) {
     if (!user.value) throw new Error('not_logged_in')
-    const newApp: ProfessionalApplication = {
-      id: crypto.randomUUID(),
-      profileId: user.value.id,
-      ...app,
-      status: 'PENDING',
-    }
-    applications.value = [newApp, ...applications.value.filter(a => a.profileId !== user.value!.id)]
-    saveApps(applications.value)
-    update({ isProfessional: true })
+    await $fetch<ProfessionalApplication>('/api/applications', {
+      method: 'POST',
+      body: { email: user.value.email, ...app },
+    })
+    await refreshApplications()
+    await restore()
   }
 
-  function approve(id: string) {
-    applications.value = applications.value.map(a => a.id === id ? { ...a, status: 'APPROVED' } : a)
-    saveApps(applications.value)
+  async function approve(id: string) {
+    if (!user.value) return
+    await $fetch<ProfessionalApplication>(`/api/applications/${id}`, {
+      method: 'PATCH',
+      body: { email: user.value.email, action: 'approve' },
+    })
+    await refreshApplications()
   }
 
-  function reject(id: string, reason: string) {
-    applications.value = applications.value.map(a => a.id === id ? { ...a, status: 'REJECTED', rejectionReason: reason } : a)
-    saveApps(applications.value)
+  async function reject(id: string, reason: string) {
+    if (!user.value) return
+    await $fetch<ProfessionalApplication>(`/api/applications/${id}`, {
+      method: 'PATCH',
+      body: { email: user.value.email, action: 'reject', reason },
+    })
+    await refreshApplications()
+  }
+
+  async function fetchUsers() {
+    if (!user.value) return
+    users.value = await $fetch('/api/users', { query: { email: user.value.email } })
+  }
+
+  async function deleteUser(email: string) {
+    if (!user.value) return
+    await $fetch(`/api/users/${encodeURIComponent(email)}`, {
+      method: 'DELETE',
+      query: { email: user.value.email },
+    })
+    users.value = users.value.filter(u => u.email !== email)
   }
 
   const myApplication = computed(() =>
     user.value ? applications.value.find(a => a.profileId === user.value!.id) ?? null : null,
   )
 
-  return { user, isLoggedIn, isAdmin, isProfessional, restore, register, login, logout, update, applications, applyProfessional, approve, reject, myApplication }
+  return { user, isLoggedIn, isAdmin, isProfessional, loading, restore, register, login, logout, update, applications, refreshApplications, applyProfessional, approve, reject, myApplication, users, fetchUsers, deleteUser }
 }

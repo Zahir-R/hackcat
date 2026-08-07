@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { FaqItem } from '~/types'
 import { matchFaq, resolveFaqLink } from '~/composables/useFaq'
+import { faRobot, faXmark, faArrowRight, faArrowLeft, faPaperPlane, faEllipsis } from '@fortawesome/free-solid-svg-icons'
 
 const { t } = useI18n()
 const { categories, visibleItems, fetchFaq, findItem } = useFaq()
@@ -90,20 +91,20 @@ const activeItem = computed(() => view.value === 'answer' && selectedItem.value 
       <Transition name="pop">
         <div v-if="open" class="card w-[min(380px,calc(100vw-2rem))] mb-2.5 flex flex-col p-0 overflow-hidden max-h-[min(70vh,560px)]">
           <div class="flex justify-between items-center px-4 py-2.5 bg-primary text-white">
-            <strong>🤖 {{ t('ramon.name') }}</strong>
-            <button class="border-none bg-transparent text-white min-h-9" @click="open = false" aria-label="Cerrar">✕</button>
+            <strong class="inline-flex items-center gap-2"><FontAwesomeIcon :icon="faRobot" /> {{ t('ramon.name') }}</strong>
+            <button class="border-none bg-transparent text-white min-h-9" @click="open = false" aria-label="Cerrar"><FontAwesomeIcon :icon="faXmark" /></button>
           </div>
 
           <div ref="panelBody" class="p-3 overflow-y-auto flex-1">
             <div v-for="(m, i) in messages" :key="i" class="flex mb-2" :class="m.role === 'user' ? 'justify-end' : 'justify-start'">
-              <div class="max-w-[85%] px-3 py-2.5 rounded-xl bg-[#F0D3A8] text-primary-dark">
+              <div class="max-w-[85%] px-3 py-2.5 rounded-xl bg-accent-soft text-text">
                 <p class="m-0">{{ m.content }}</p>
                 <NuxtLink v-if="m.link" :to="m.link.to" class="inline-block mt-1 text-accent font-bold no-underline" @click="open = false">
-                  {{ m.link.label }} →
+                  {{ m.link.label }} <FontAwesomeIcon :icon="faArrowRight" />
                 </NuxtLink>
               </div>
             </div>
-            <div v-if="typing" class="flex justify-start mb-2"><div class="max-w-[85%] px-3 py-2.5 rounded-xl bg-[#F0D3A8] text-primary-dark">…</div></div>
+            <div v-if="typing" class="flex justify-start mb-2"><div class="max-w-[85%] px-3 py-2.5 rounded-xl bg-accent-soft text-text"><FontAwesomeIcon :icon="faEllipsis" /></div></div>
 
             <div class="mt-1">
               <div v-if="view === 'menu'" class="flex flex-col gap-1">
@@ -112,7 +113,7 @@ const activeItem = computed(() => view.value === 'answer' && selectedItem.value 
                 </button>
               </div>
               <div v-else-if="view === 'category'" class="flex flex-col gap-1">
-                <button class="chip-tag text-left min-h-11" @click="backToMenu">← {{ t('ramon.back') }}</button>
+                <button class="chip-tag text-left min-h-11" @click="backToMenu"><FontAwesomeIcon :icon="faArrowLeft" class="mr-1.5" /> {{ t('ramon.back') }}</button>
                 <button
                   v-for="it in currentItems"
                   :key="it.id"
@@ -123,7 +124,7 @@ const activeItem = computed(() => view.value === 'answer' && selectedItem.value 
                 </button>
               </div>
               <div v-else class="flex flex-col gap-1">
-                <button class="chip-tag text-left min-h-11" @click="backToMenu">← {{ t('ramon.back') }}</button>
+                <button class="chip-tag text-left min-h-11" @click="backToMenu"><FontAwesomeIcon :icon="faArrowLeft" class="mr-1.5" /> {{ t('ramon.back') }}</button>
               </div>
             </div>
           </div>
@@ -135,14 +136,14 @@ const activeItem = computed(() => view.value === 'answer' && selectedItem.value 
               :placeholder="t('ramon.placeholder')"
               :disabled="typing"
             />
-            <button class="btn btn-primary min-h-11 min-w-11" type="submit" :disabled="typing">➤</button>
+            <button class="btn btn-primary min-h-11 min-w-11" type="submit" :disabled="typing"><FontAwesomeIcon :icon="faPaperPlane" /></button>
           </form>
         </div>
       </Transition>
 
       <button class="btn btn-accent rounded-full shadow-card font-bold float-right" @click="open = !open" aria-label="Abrir Ramon">
-        <span v-if="!open">🤖 {{ t('ramon.name') }}</span>
-        <span v-else>✕</span>
+        <span v-if="!open" class="inline-flex items-center gap-2"><FontAwesomeIcon :icon="faRobot" /> {{ t('ramon.name') }}</span>
+        <span v-else><FontAwesomeIcon :icon="faXmark" /></span>
       </button>
     </div>
   </Teleport>
